@@ -1,7 +1,7 @@
 ---
 output:
-  html_document: default
   pdf_document: default
+  html_document: default
 ---
 
 
@@ -28,15 +28,16 @@ knitr::read_chunk("chunks.R")
 
 # Introduction
 
-The goal of this project was to extract the common behavioural patterns of bees in an experiment which shared similarities to the morris water maze experiment. Cluster analysis has previously been successfully applied to the morris water maze experiment to provide insight into how rodents behaviour at a fine grain resolution. The goal of this project was to investigate whether similar techniques were generalizable to slightly different experiments and other species. More specifically to analyse the behaviour of bees being studies using an experiment which is an adaption of the detour paradigm.
+The goal of this project was to extract the common behavioural patterns of bees in an experiment which shared similarities to the morris water maze experiment. Cluster analysis has previously been successfully applied to the morris water maze experiment to provide insight into how rodents behaviour at a fine grain resolution. The goal of this project was to investigate whether similar techniques were generalizable to different experiments and  species. In particular we wanted to analyse the behaviour of bees in an  adapted experiment of the detour paradigm.
 
-In this experiment bees were placed in a circular arena in which they could only move in the x and y directions, i.e. not vertically. Lights were then switched off and on at different positions along the edge of the arena. The bee's position was tracked for the duration of the experiment, producing a dataset of x, y coordinates at uniform time intervals. The experiments were conducted for 3 different treatment groups (1) a no treatment group (2) a saline treatment group and (3) a procaine treatment group.
+In this experiment bees were placed in a circular arena in which they could only move in the x and y directions, i.e. not vertically. Lights were then switched off and on at different positions along the edge of the arena. The bee's position was tracked for the duration of the experiment, producing a dataset of x, y coordinates at uniform time intervals. The experiments were conducted for 3 different treatment groups (1) no treatment (2) treated with saline (3) treated with saline.
 
 # Feature Extraction
 
 One of the central challenges of this project was to extract features from the recorded x,y coordinates of the bees so that the data could be represented in a format that would enable typical behaviours and strategies to be detected using cluster analysis. Features were selected that were likely to capture the geometric and positional characteristics of a segment.
 
 ##Features
+
 ###Median distance from the centre
 This is the median Euclidean distance of all points of a segment scaled by the arena radius
 
@@ -84,6 +85,12 @@ The diameter of the arena was taken to be either the distance between the max an
 
 ###Determining the minimum enclosing ellipse
 The minimum enclosing ellipse was computed using the Khachiyan Algorithm. Code from https://ecogenomics.github.io/GroopM/dev_docs/groopm.ellipsoid.EllipsoidTool-class.html was used with some modifications to work for 2d data.
+
+# Voting
+
+In reality a bees path can be broken down into shorter joined up segments where each is internally consistent in behaviour. Hereafter we will refer to these segments as the true segments to distinguish them from the arbitrary segments specified for the cluster analysis. 
+
+Since the purpose of the this analytical study was to determine the behaviour of bees and how it changes within a single path, it is impossible to know in advance where these true segments start and end. Therefore some arbitrary segment length and start and end position had to be selected to perform the analysis. As a consequence, it is highly unlikely that their beginning and ending will coincide with those of the true segments. In order to more accurately identify the true segment's endpoints, segments were overlapped and voting performed. More specifically, for any given point, the number of segments assigned to each cluster were counted, and the point assigned to the cluster with the highest count. In some cases there was no outright winner, but instead there were two or more clusters equally tied. In this case the point was considered unidentified.
 
 ## Session information
 
