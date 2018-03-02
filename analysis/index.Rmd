@@ -1,11 +1,13 @@
 ---
-title: "Home"
+title: "Bee Clustering Analysis"
 output:
   html_document:
     toc: false
 ---
 
 Welcome to my research website.
+
+Click on this [link](Feature_Extraction.html) to see my results.
 
 ```{python}
 

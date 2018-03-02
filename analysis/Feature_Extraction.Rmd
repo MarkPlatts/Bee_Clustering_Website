@@ -4,7 +4,6 @@ output:
   pdf_document: default
 ---
 
-
 <!-- The file analysis/chunks.R contains chunks that define default settings
 shared across the workflowr files. -->
 ```{r read-chunk, include=FALSE, cache=FALSE}
@@ -90,9 +89,7 @@ The minimum enclosing ellipse was computed using the Khachiyan Algorithm. Code f
 
 # Voting
 
-In reality a bees path can be broken down into shorter joined up segments where each is internally consistent in behaviour. Hereafter we will refer to these segments as the true segments to distinguish them from the arbitrary segments specified for the cluster analysis. 
-
-Since part of the purpose of the this analytical study was to determine where bees changed their behaviour within a single path, it is impossible to know in advance where these true segments start and end. Therefore some arbitrary segment length and start and end position had to be selected to perform the analysis. Consequently, it is highly unlikely that their beginning and ending will coincide with those of the true segments. In order to more accurately identify the true segment's endpoints, segments were overlapped and voting performed. More specifically, for any given point, the number of segments assigned to each cluster were counted, and the point assigned to the cluster with the highest count. In some cases there was no outright winner, but instead there were two or more clusters equally tied. In this case the point was considered unidentified.
+The bee's path was split up into segments of a uniform length where each subsequent segment overlapped the previous segment by 70% of its length. Cluster analysis was performed to find the natural groupings of segments. For each point a vote was taken from each segment that overlapped that position and the point assigned to the cluster with the most votes. Where no two cluster groups tied, points group was considered unidentified.
 
 ## Session information
 
