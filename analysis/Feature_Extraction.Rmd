@@ -94,6 +94,8 @@ In reality a bees path can be broken down into shorter joined up segments where 
 
 Since part of the purpose of the this analytical study was to determine where bees changed their behaviour within a single path, it is impossible to know in advance where these true segments start and end. Therefore some arbitrary segment length and start and end position had to be selected to perform the analysis. Consequently, it is highly unlikely that their beginning and ending will coincide with those of the true segments. In order to more accurately identify the true segment's endpoints, segments were overlapped and voting performed. More specifically, for any given point, the number of segments assigned to each cluster were counted, and the point assigned to the cluster with the highest count. In some cases there was no outright winner, but instead there were two or more clusters equally tied. In this case the point was considered unidentified.
 
+Small test
+
 ## Session information
 
 <!-- Insert the session information into the document -->
