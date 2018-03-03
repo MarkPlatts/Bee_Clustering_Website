@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+<meta name="author" content="First Last" />
+
+
+<title>Untitled</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/journal.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-4.5.0/css/font-awesome.min.css" rel="stylesheet" />
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 61px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 66px;
+  margin-top: -66px;
+}
+
+.section h2 {
+  padding-top: 66px;
+  margin-top: -66px;
+}
+.section h3 {
+  padding-top: 66px;
+  margin-top: -66px;
+}
+.section h4 {
+  padding-top: 66px;
+  margin-top: -66px;
+}
+.section h5 {
+  padding-top: 66px;
+  margin-top: -66px;
+}
+.section h6 {
+  padding-top: 66px;
+  margin-top: -66px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+  padding-left: 25px;
+  text-indent: 0;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Bee Clustering</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="about.html">About</a>
+</li>
+<li>
+  <a href="methods.html">Methods</a>
+</li>
+<li>
+  <a href="license.html">License</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://github.com/jdblischak/workflowr">
+    <span class="fa fa-github"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+<!-- Add a small amount of space between sections. -->
+<style type="text/css">
+div.section {
+  padding-top: 12px;
+}
+</style>
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Untitled</h1>
+<h4 class="author"><em>First Last</em></h4>
+<h4 class="date"><em>YYYY-MM-DD</em></h4>
+
+</div>
+
+
+<!-- The file analysis/chunks.R contains chunks that define default settings
+shared across the workflowr files. -->
+<!-- Update knitr chunk options -->
+<!-- Insert the date the file was last updated -->
+<p><strong>Last updated:</strong> 2018-03-03</p>
+<!-- Insert the code version (Git commit SHA1) if Git repository exists and R
+ package git2r is installed -->
+<p><strong>Code version:</strong> 9a56b9b</p>
+<!-- Add your analysis here -->
+<div id="introduction" class="section level1">
+<h1>Introduction</h1>
+<p>The goal of this project was to extract the common behavioural patterns of bees in an experiment which shared similarities to the morris water maze experiment. Cluster analysis has previously been applied successfully to the morris water maze experiment to provide insight into how rodents behaviour at a fine grain resolution. The goal of this project was to investigate whether similar techniques were generalizable to different experiments and species. In particular we wanted to analyse the behaviour of bees in an experiment adapted from the detour paradigm.</p>
+<p>In this experiment bees were placed in a circular arena in which they could only move in the x and y directions, but not vertically. Lights were then switched off and on at different positions along the edge of the arena. The bee’s position was tracked for the duration of the experiment, producing a dataset of x, y coordinates at uniform time intervals. The experiments were conducted for 3 different treatment groups (1) no treatment (2) treated with saline (3) treated with saline.</p>
+</div>
+<div id="feature-extraction" class="section level1">
+<h1>Feature Extraction</h1>
+<p>One of the central challenges of this project was to extract features from the recorded x,y coordinates of the bees so that the data could be represented in a format that would enable typical behaviours and strategies to be detected using cluster analysis. Features were selected that were likely to capture the geometric and positional characteristics of a segment.</p>
+<div id="features" class="section level2">
+<h2>Features</h2>
+<div id="median-distance-from-the-centre" class="section level3">
+<h3>Median distance from the centre</h3>
+<p>This is the median Euclidean distance of a segment’s points from the centre of the arena scaled by the arena radius.</p>
+</div>
+<div id="interquartile-range-of-the-distance-from-the-centre" class="section level3">
+<h3>Interquartile range of the distance from the centre</h3>
+<p>This is the difference between upper and lower quartile distances from the centre scaled by the arena radius</p>
+</div>
+<div id="focus" class="section level3">
+<h3>Focus</h3>
+<p>The focus is specified as: <span class="math display">\[f=1-\frac{4A}{\Pi d^2}\]</span> Where A is minimum enclosing ellipsoid around the segment and d is the segment length.</p>
+</div>
+<div id="eccentricity" class="section level3">
+<h3>Eccentricity</h3>
+<p>The eccentricity is specified as:</p>
+<p>E=1-b<sup>2/a</sup>2 <span class="math display">\[E=1-\frac{b^2}{a^2}\]</span> Where a and b is semi-major axis and the semi-minor axis of the enclosing ellipse.</p>
+</div>
+<div id="inner-radius-variation" class="section level3">
+<h3>Inner radius variation</h3>
+<p>The inner radius variation is specified as: <span class="math display">\[ v = \frac{(c_{UQ}-c_{LQ})}{c_{MED}} \]</span> Where <span class="math inline">\(c_{UQ}\)</span>, <span class="math inline">\(c_{LQ}\)</span> and <span class="math inline">\(c_{MED}\)</span> are the upper quartile, lower quartile and median for the distance from the centre of the minimum enclosing ellipse.</p>
+</div>
+<div id="central-displacement" class="section level3">
+<h3>Central displacement</h3>
+<p>The central displacement is specified as the distance between the centre of the arena and the centre of the minimum enclosing ellipse.</p>
+</div>
+<div id="path-efficiency" class="section level3">
+<h3>Path efficiency</h3>
+<p>The path efficiency is specified as: <span class="math display">\[P=\frac{\sqrt{(x_n-x_1)^2+(y_n-y_1)^2}}{\sum^n_{i=1}\sqrt{(x_{i+1}-x_i)^2+(y_{i+1}-y_i)^2}}\]</span> Where <span class="math inline">\(x_i\)</span> and <span class="math inline">\(y_i\)</span> are ith x and y coordinates of the segment respectively and n is the number of points in the segment. intuitively, it can be thought of as how directly the segment moves from one location to another. (<a href="https://www.sciencedirect.com/science/article/pii/S0889159115300398" class="uri">https://www.sciencedirect.com/science/article/pii/S0889159115300398</a>)</p>
+</div>
+<div id="sum-of-absolute-angles" class="section level3">
+<h3>Sum of absolute angles</h3>
+<p>The sum of absolute angles is specified as: <span class="math display">\[S=\sum\arccos\left(\frac{\langle{\bar{u}},\bar{v} \rangle}{||\bar{u}||.||\bar{v}||}\right)\]</span> Where <span class="math inline">\(\bar{u}\)</span> and <span class="math inline">\(\bar{v}\)</span> are sequential vectors. (<a href="https://www.sciencedirect.com/science/article/pii/S0889159115300398" class="uri">https://www.sciencedirect.com/science/article/pii/S0889159115300398</a>)</p>
+</div>
+</div>
+<div id="intermediate-calculations" class="section level2">
+<h2>Intermediate calculations</h2>
+<div id="calculating-the-position-of-the-centre-of-the-arena" class="section level3">
+<h3>Calculating the position of the centre of the arena</h3>
+<p>The centre of the arena was taken to be the midpoint between the max and min x and y coordinates in the entire dataset of points.</p>
+</div>
+<div id="calculating-the-diameter-of-the-arena" class="section level3">
+<h3>Calculating the diameter of the arena</h3>
+<p>The diameter of the arena was taken to be either the distance between the max and min Y coordinate or the max and min X coordinate, whichever was the greatest.</p>
+</div>
+<div id="determining-the-minimum-enclosing-ellipse" class="section level3">
+<h3>Determining the minimum enclosing ellipse</h3>
+<p>The minimum enclosing ellipse was computed using the Khachiyan Algorithm. Code from <a href="https://ecogenomics.github.io/GroopM/dev_docs/groopm.ellipsoid.EllipsoidTool-class.html" class="uri">https://ecogenomics.github.io/GroopM/dev_docs/groopm.ellipsoid.EllipsoidTool-class.html</a> was used with some modifications to work for 2d data.</p>
+</div>
+</div>
+</div>
+<div id="voting" class="section level1">
+<h1>Voting</h1>
+<p>The bee’s path was split up into segments of a uniform length where each subsequent segment overlapped the previous segment by 70% of its length. Cluster analysis was performed to find the natural groupings of segments. For each point a vote was taken from each segment that overlapped that position and the point assigned to the cluster with the most votes. Where no two cluster groups tied, points group was considered unidentified.</p>
+<div id="session-information" class="section level2">
+<h2>Session information</h2>
+<!-- Insert the session information into the document -->
+<pre class="r"><code>sessionInfo()</code></pre>
+<pre><code>R version 3.4.3 (2017-11-30)
+Platform: x86_64-w64-mingw32/x64 (64-bit)
+Running under: Windows 7 x64 (build 7601) Service Pack 1
+
+Matrix products: default
+
+locale:
+[1] LC_COLLATE=English_United Kingdom.1252 
+[2] LC_CTYPE=English_United Kingdom.1252   
+[3] LC_MONETARY=English_United Kingdom.1252
+[4] LC_NUMERIC=C                           
+[5] LC_TIME=English_United Kingdom.1252    
+
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods   base     
+
+loaded via a namespace (and not attached):
+ [1] compiler_3.4.3  backports_1.1.1 magrittr_1.5    rprojroot_1.3-2
+ [5] tools_3.4.3     htmltools_0.3.6 yaml_2.1.16     Rcpp_0.12.13   
+ [9] stringi_1.1.6   rmarkdown_1.8   knitr_1.17      git2r_0.21.0   
+[13] stringr_1.3.0   digest_0.6.12   evaluate_0.10.1</code></pre>
+</div>
+</div>
+
+<!-- Adjust MathJax settings so that all math formulae are shown using
+TeX fonts only; see
+http://docs.mathjax.org/en/latest/configuration.html.  This will make
+the presentation more consistent at the cost of the webpage sometimes
+taking slightly longer to load. Note that this only works because the
+footer is added to webpages before the MathJax javascript. -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    "HTML-CSS": { availableFonts: ["TeX"] }
+  });
+</script>
+
+<hr>
+<p>
+    This <a href="http://rmarkdown.rstudio.com">R Markdown</a> site was created with <a href="https://github.com/jdblischak/workflowr">workflowr</a>
+</p>
+<hr>
+
+<!-- To enable disqus, uncomment the section below and provide your disqus_shortname -->
+
+<!-- disqus
+  <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'rmarkdown'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+-->
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
