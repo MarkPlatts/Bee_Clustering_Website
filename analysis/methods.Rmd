@@ -26,13 +26,7 @@ knitr::read_chunk("chunks.R")
 
 <!-- Add your analysis here -->
 
-# Introduction
-
-The goal of this project was to extract the common behavioural patterns of bees in an experiment which shared similarities to the morris water maze experiment. Cluster analysis has previously been applied successfully to the morris water maze experiment to provide insight into how rodents behaviour at a fine grain resolution. The goal of this project was to investigate whether similar techniques were generalizable to different experiments and  species. In particular we wanted to analyse the behaviour of bees in an experiment adapted from the detour paradigm.
-
-In this experiment bees were placed in a circular arena in which they could only move in the x and y directions, but not vertically. Lights were then switched off and on at different positions along the edge of the arena. The bee's position was tracked for the duration of the experiment, producing a dataset of x, y coordinates at uniform time intervals. The experiments were conducted for 3 different treatment groups (1) no treatment (2) treated with saline (3) treated with saline.
-
-# Feature Extraction
+# Feature extraction
 
 One of the central challenges of this project was to extract features from the recorded x,y coordinates of the bees so that the data could be represented in a format that would enable typical behaviours and strategies to be detected using cluster analysis. Features were selected that were likely to capture the geometric and positional characteristics of a segment.
 
@@ -88,7 +82,7 @@ The minimum enclosing ellipse was computed using the Khachiyan Algorithm. Code f
 
 # Voting
 
-The bee's path was split up into segments of a uniform length where each subsequent segment overlapped the previous segment by 70% of its length. Cluster analysis was performed to find the natural groupings of segments. For each point a vote was taken from each segment that overlapped that position and the point assigned to the cluster with the most votes. Where no two cluster groups tied, points group was considered unidentified.
+The bee's path was split up into segments of a uniform length where each subsequent segment overlapped the previous segment by 70% of its length. Cluster analysis was performed to find the natural groupings of segments according to the above extracted features. For each point a vote was taken from each segment that overlapped that position and the point assigned to the cluster with the most votes. Where no two cluster groups tied, points group was considered unidentified.
 
 # Session information
 

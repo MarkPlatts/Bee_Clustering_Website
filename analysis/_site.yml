@@ -11,8 +11,6 @@ navbar:
       href: introduction.html
     - text: "Methods"
       href: methods.html
-    - text: "License"
-      href: license.html
   right:
     - icon: fa-github
       href: https://github.com/jdblischak/workflowr
