@@ -8,7 +8,7 @@ navbar:
     - text: "Home"
       href: index.html
     - text: "Introduction"
-      href: introduction.html
+      href: Introduction.html
     - text: "Methods"
       href: methods.html
   right:
