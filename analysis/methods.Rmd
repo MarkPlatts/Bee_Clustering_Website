@@ -82,7 +82,7 @@ The minimum enclosing ellipse was computed using the Khachiyan Algorithm. Code f
 
 # Voting
 
-The bee's path was split up into segments of a uniform length where each subsequent segment overlapped the previous segment by 70% of its length. Cluster analysis was performed to find the natural groupings of segments according to the above extracted features. For each point a vote was taken from each segment that overlapped that position and the point assigned to the cluster with the most votes. Where no two cluster groups tied, points group was considered unidentified.
+The bee's path was split up into segments of a uniform length where each consecutive segment overlapped the previous segment by 70% of its length. K-means cluster analysis was performed to find the natural groupings of segments according to the above extracted features. For each point a vote was taken from each segment that overlapped that position and the point assigned to the cluster with the most votes. Points where two or more cluster groups tied, were considered unidentified.
 
 # Session information
 
