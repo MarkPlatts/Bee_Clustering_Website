@@ -321,14 +321,25 @@ div.section {
 shared across the workflowr files. -->
 <!-- Update knitr chunk options -->
 <!-- Insert the date the file was last updated -->
-<p><strong>Last updated:</strong> 2018-03-04</p>
+<p><strong>Last updated:</strong> 2018-03-22</p>
 <!-- Insert the code version (Git commit SHA1) if Git repository exists and R
  package git2r is installed -->
-<p><strong>Code version:</strong> 0df179b</p>
+<p><strong>Code version:</strong> da028ae</p>
 <!-- Add your analysis here -->
+<pre><code>here() starts at C:/Users/Mark/Desktop/Desktop etc/Bee_Clustering_Website</code></pre>
+<pre><code>
+Attaching package: &#39;dplyr&#39;</code></pre>
+<pre><code>The following objects are masked from &#39;package:stats&#39;:
+
+    filter, lag</code></pre>
+<pre><code>The following objects are masked from &#39;package:base&#39;:
+
+    intersect, setdiff, setequal, union</code></pre>
+<pre><code>Warning: package &#39;captioner&#39; was built under R version 3.4.4</code></pre>
+<pre class="r"><code>fig_nums &lt;- captioner()</code></pre>
 <div id="feature-extraction" class="section level1">
 <h1>Feature extraction</h1>
-<p>One of the central challenges of this project was to extract features from the recorded x,y coordinates of the bees so that the data could be represented in a format that would enable typical behaviours and strategies to be detected using cluster analysis. Features were selected that were likely to capture the geometric and positional characteristics of a segment.</p>
+<p>One of the central challenges of this project was to extract features from the bees recorded x,y coordinates, representing the data in a format that would enable typical behaviours to be detected using cluster analysis. Features were selected that were likely to capture the geometric and positional characteristics of a segment.</p>
 <div id="features" class="section level2">
 <h2>Features</h2>
 <div id="median-distance-from-the-centre" class="section level3">
@@ -381,9 +392,17 @@ shared across the workflowr files. -->
 </div>
 </div>
 </div>
+<div id="segmenting-the-bees-path" class="section level1">
+<h1>Segmenting the bees path</h1>
+<p>A bee’s path is defined as he entire path from beginning to end for a single instance of the experiment (Figure 1).</p>
+<p><img src="figure/methods.Rmd/unnamed-chunk-4-1.png" width="384" style="display: block; margin: auto;" /> Figure 1: The full path of a bee in a single experiment.</p>
+<p>This was split up into segments of a uniform length where each consecutive segment overlapped the previous segment by 70% of its length (Figure 2).</p>
+<p><img src="figure/methods.Rmd/unnamed-chunk-5-1.png" width="384" style="display: block; margin: auto;" /> Figure 2: One segment from the full bee’s path.</p>
+<p><img src="figure/methods.Rmd/unnamed-chunk-6-1.png" width="672" style="display: block; margin: auto;" /></p>
+</div>
 <div id="voting" class="section level1">
 <h1>Voting</h1>
-<p>The bee’s path was split up into segments of a uniform length where each subsequent segment overlapped the previous segment by 70% of its length. Cluster analysis was performed to find the natural groupings of segments according to the above extracted features. For each point a vote was taken from each segment that overlapped that position and the point assigned to the cluster with the most votes. Where no two cluster groups tied, points group was considered unidentified.</p>
+<p>K-means cluster analysis was performed to find the natural groupings of segments according to the above extracted features. For each point a vote was taken from each segment that overlapped that position and the point assigned to the cluster with the most votes. Points where two or more cluster groups tied, were considered unidentified.</p>
 </div>
 <div id="session-information" class="section level1">
 <h1>Session information</h1>
@@ -405,11 +424,19 @@ locale:
 attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
+other attached packages:
+[1] bindrcpp_0.2    captioner_2.2.3 ggplot2_2.2.1   dplyr_0.7.4    
+[5] here_0.1       
+
 loaded via a namespace (and not attached):
- [1] compiler_3.4.3  backports_1.1.1 magrittr_1.5    rprojroot_1.3-2
- [5] tools_3.4.3     htmltools_0.3.6 yaml_2.1.16     Rcpp_0.12.13   
- [9] stringi_1.1.6   rmarkdown_1.8   knitr_1.17      git2r_0.21.0   
-[13] stringr_1.3.0   digest_0.6.12   evaluate_0.10.1</code></pre>
+ [1] Rcpp_0.12.13     knitr_1.17       bindr_0.1        magrittr_1.5    
+ [5] munsell_0.4.3    colorspace_1.3-2 R6_2.2.2         rlang_0.1.4     
+ [9] plyr_1.8.4       stringr_1.3.0    tools_3.4.3      grid_3.4.3      
+[13] gtable_0.2.0     git2r_0.21.0     htmltools_0.3.6  lazyeval_0.2.1  
+[17] yaml_2.1.16      rprojroot_1.3-2  digest_0.6.12    assertthat_0.2.0
+[21] tibble_1.4.2     reshape2_1.4.2   glue_1.2.0       evaluate_0.10.1 
+[25] rmarkdown_1.8    labeling_0.3     stringi_1.1.6    compiler_3.4.3  
+[29] pillar_1.1.0     scales_0.5.0     backports_1.1.1  pkgconfig_2.0.1 </code></pre>
 </div>
 
 <!-- Adjust MathJax settings so that all math formulae are shown using
