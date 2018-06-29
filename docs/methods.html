@@ -324,7 +324,7 @@ shared across the workflowr files. -->
 <p><strong>Last updated:</strong> 2018-06-29</p>
 <!-- Insert the code version (Git commit SHA1) if Git repository exists and R
  package git2r is installed -->
-<p><strong>Code version:</strong> 545b533</p>
+<p><strong>Code version:</strong> 39a43e8</p>
 <!-- Add your analysis here -->
 <pre><code>here() starts at C:/Users/Mark/Desktop/Desktop etc/Bee_Clustering_Website</code></pre>
 <pre><code>
@@ -344,28 +344,28 @@ Attaching package: &#39;dplyr&#39;</code></pre>
 <h2>Features</h2>
 <div id="median-distance-from-the-centre" class="section level3">
 <h3>Median distance from the centre</h3>
-<p>This is the median Euclidean distance of a segment’s points from the centre of the arena scaled by the arena radius.</p>
+<p>This is the median Euclidean distance of a segment’s points from the centre of the arena scaled by the arena radius <span class="citation">(Tiago V. Gehring 2015)</span>.</p>
 </div>
 <div id="interquartile-range-of-the-distance-from-the-centre" class="section level3">
 <h3>Interquartile range of the distance from the centre</h3>
-<p>This is the difference between upper and lower quartile distances from the centre scaled by the arena radius</p>
+<p>This is the difference between upper and lower quartile distances from the centre scaled by the arena radius <span class="citation">(Tiago V. Gehring 2015)</span>.</p>
 </div>
 <div id="focus" class="section level3">
 <h3>Focus</h3>
-<p>The focus is specified as: <span class="math display">\[f=1-\frac{4A}{\Pi d^2}\]</span> Where A is minimum enclosing ellipsoid around the segment and d is the segment length.</p>
+<p>The focus is specified as: <span class="math display">\[f=1-\frac{4A}{\Pi d^2}\]</span> Where A is minimum enclosing ellipsoid around the segment and d is the segment length <span class="citation">(Tiago V. Gehring 2015)</span>.</p>
 </div>
 <div id="eccentricity" class="section level3">
 <h3>Eccentricity</h3>
 <p>The eccentricity is specified as:</p>
-<p>E=1-b<sup>2/a</sup>2 <span class="math display">\[E=1-\frac{b^2}{a^2}\]</span> Where a and b is semi-major axis and the semi-minor axis of the enclosing ellipse.</p>
+<p>E=1-b<sup>2/a</sup>2 <span class="math display">\[E=1-\frac{b^2}{a^2}\]</span> Where a and b is semi-major axis and the semi-minor axis of the enclosing ellipse <span class="citation">(Tiago V. Gehring 2015)</span>.</p>
 </div>
 <div id="inner-radius-variation" class="section level3">
 <h3>Inner radius variation</h3>
-<p>The inner radius variation is specified as: <span class="math display">\[ v = \frac{(c_{UQ}-c_{LQ})}{c_{MED}} \]</span> Where <span class="math inline">\(c_{UQ}\)</span>, <span class="math inline">\(c_{LQ}\)</span> and <span class="math inline">\(c_{MED}\)</span> are the upper quartile, lower quartile and median for the distance from the centre of the minimum enclosing ellipse.</p>
+<p>The inner radius variation is specified as: <span class="math display">\[ v = \frac{(c_{UQ}-c_{LQ})}{c_{MED}} \]</span> Where <span class="math inline">\(c_{UQ}\)</span>, <span class="math inline">\(c_{LQ}\)</span> and <span class="math inline">\(c_{MED}\)</span> are the upper quartile, lower quartile and median for the distance from the centre of the minimum enclosing ellipse <span class="citation">(Tiago V. Gehring 2015)</span>.</p>
 </div>
 <div id="central-displacement" class="section level3">
 <h3>Central displacement</h3>
-<p>The central displacement is specified as the distance between the centre of the arena and the centre of the minimum enclosing ellipse.</p>
+<p>The central displacement is specified as the distance between the centre of the arena and the centre of the minimum enclosing ellipse <span class="citation">(Tiago V. Gehring 2015)</span>.</p>
 </div>
 <div id="path-efficiency" class="section level3">
 <h3>Path efficiency</h3>
@@ -396,9 +396,9 @@ Attaching package: &#39;dplyr&#39;</code></pre>
 <h1>Segmenting the bees path</h1>
 <p>A bee’s path is defined as he entire path from beginning to end for a single instance of the experiment (Figure 1).</p>
 <p><img src="figure/methods.Rmd/unnamed-chunk-4-1.png" width="384" style="display: block; margin: auto;" /> Figure 1: The full path of a bee in a single experiment.</p>
-<p>This was split up into segments of a uniform length where each consecutive segment overlapped the previous segment by 70% of its length (Figure 2).</p>
-<p><img src="figure/methods.Rmd/unnamed-chunk-5-1.png" width="384" style="display: block; margin: auto;" /> Figure 3:</p>
-<p><img src="figure/methods.Rmd/unnamed-chunk-6-1.png" width="1152" style="display: block; margin: auto;" /></p>
+<p>This was split up into segments of a uniform length where each consecutive segment overlapped the previous segment by 70% of its length. Figure 2 shows 3 overlapping segments and Figure 3.</p>
+<p><img src="figure/methods.Rmd/unnamed-chunk-5-1.png" width="384" style="display: block; margin: auto;" /> Figure 2: Three overlapping segments from the full bee’s path.</p>
+<p><img src="figure/methods.Rmd/unnamed-chunk-6-1.png" width="1152" style="display: block; margin: auto;" /> Figure 3: Three segments displayed separetely.</p>
 </div>
 <div id="voting" class="section level1">
 <h1>Voting</h1>
@@ -437,6 +437,14 @@ loaded via a namespace (and not attached):
 [21] tibble_1.4.2     reshape2_1.4.2   glue_1.2.0       evaluate_0.10.1 
 [25] rmarkdown_1.8    labeling_0.3     stringi_1.1.6    compiler_3.4.3  
 [29] pillar_1.1.0     scales_0.5.0     backports_1.1.1  pkgconfig_2.0.1 </code></pre>
+</div>
+<div id="references" class="section level1 unnumbered">
+<h1>References</h1>
+<div id="refs" class="references">
+<div id="ref-tiagogehringetal2015-bibtexing">
+<p>Tiago V. Gehring, Carmen Sandi &amp; Eleni Vasilaki, Gediminas Luksys. 2015. “Detailed Classification of Swimming Paths in the Morris Water Maze: Multiple Strategies Within One Trial.” <em>Scientific Reports</em> 5: 14562.</p>
+</div>
+</div>
 </div>
 
 <!-- Adjust MathJax settings so that all math formulae are shown using
