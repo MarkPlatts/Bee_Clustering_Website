@@ -131,7 +131,7 @@ fig_nums("segment_example", "Three overlapping segments from the full bee's path
 ```
 `r fig_nums("three_segments")`
 
-```{r, echo = FALSE, fig.height=5, fig.width=12}
+```{r, echo = FALSE, fig.height=3, fig.width=12}
 ggplot(data = df_seg3, aes(x_mm, y_mm)) +
               geom_path() +
               coord_cartesian(xlim = c(80,240), ylim = c(0,200)) +
