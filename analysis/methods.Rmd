@@ -3,6 +3,7 @@ title: "Methods"
 author: "Mark Platts"
 date: 2018-03-03
 output: html_document
+bibliography: bibliography.bibtex
 ---
 
 <!-- The file analysis/chunks.R contains chunks that define default settings
@@ -46,30 +47,30 @@ One of the central challenges of this project was to extract features from the b
 ##Features
 
 ###Median distance from the centre
-This is the median Euclidean distance of a segment's points from the centre of the arena scaled by the arena radius.
+This is the median Euclidean distance of a segment's points from the centre of the arena scaled by the arena radius [@tiagogehringetal2015-bibtexing].
 
 ###Interquartile range of the distance from the centre
-This is the difference between upper and lower quartile distances from the centre scaled by the arena radius
+This is the difference between upper and lower quartile distances from the centre scaled by the arena radius [@tiagogehringetal2015-bibtexing].
 
 ###Focus
 The focus is specified as:
 $$f=1-\frac{4A}{\Pi d^2}$$
-Where A is minimum enclosing ellipsoid around the segment and d is the segment length.
+Where A is minimum enclosing ellipsoid around the segment and d is the segment length [@tiagogehringetal2015-bibtexing].
 
 ###Eccentricity
 The eccentricity is specified as:
 
 E=1-b^2/a^2 
 $$E=1-\frac{b^2}{a^2}$$
-Where a and b is semi-major axis and the semi-minor axis of the enclosing ellipse.
+Where a and b is semi-major axis and the semi-minor axis of the enclosing ellipse [@tiagogehringetal2015-bibtexing].
 
 ###Inner radius variation
 The inner radius variation is specified as:
 $$ v = \frac{(c_{UQ}-c_{LQ})}{c_{MED}} $$
-Where $c_{UQ}$, $c_{LQ}$ and $c_{MED}$  are the upper quartile, lower quartile and median for the distance from the centre of the minimum enclosing ellipse.
+Where $c_{UQ}$, $c_{LQ}$ and $c_{MED}$  are the upper quartile, lower quartile and median for the distance from the centre of the minimum enclosing ellipse [@tiagogehringetal2015-bibtexing].
 
 ###Central displacement
-The central displacement is specified as the distance between the centre of the arena and the centre of the minimum enclosing ellipse.
+The central displacement is specified as the distance between the centre of the arena and the centre of the minimum enclosing ellipse [@tiagogehringetal2015-bibtexing].
 
 ###Path efficiency
 The path efficiency is specified as:
@@ -112,7 +113,7 @@ fig_nums("full_path", "The full path of a bee in a single experiment.", display 
 ```
 `r fig_nums("full_path")`
 
-This was split up into segments of a uniform length where each consecutive segment overlapped the previous segment by 70% of its length (`r fig_nums("segment_example", display = "cite")`).
+This was split up into segments of a uniform length where each consecutive segment overlapped the previous segment by 70% of its length. `r fig_nums("three_segments_overlapping", display = "cite")` shows 3 overlapping segments and `r fig_nums("three_segments_separately", display = "cite")`.
 
 ```{r, echo = F, fig.width=4, fig.height=5}
 segID3 <- unique(df_xy$SegmentID)[1:3]
@@ -122,14 +123,16 @@ df_seg3 <- dplyr::filter(.data = df_xy, SegmentID %in% segID3)
 #get rid of duplicates so that there is no overlap but instead on continuous path
 df_uniq <- df_seg3[!duplicated(df_seg3[c("x_mm", "y_mm")]),]
 
+df_uniq <- droplevels(df_uniq)
+
 ggplot(data = df_uniq, aes(x_mm, y_mm)) +
               geom_path() +
               coord_cartesian(xlim = c(80,240), ylim = c(0,200)) +
               list(geom_path(data = arena_coordinates, aes_string(x = "x", y = "y"))) +
               theme(text = element_text(size = 6))
-fig_nums("segment_example", "Three overlapping segments from the full bee's path.", display = F)
+fig_nums("three_segments_overlapping", "Three overlapping segments from the full bee's path.", display = F)
 ```
-`r fig_nums("three_segments")`
+`r fig_nums("three_segments_overlapping")`
 
 ```{r, echo = FALSE, fig.height=3, fig.width=12}
 ggplot(data = df_seg3, aes(x_mm, y_mm)) +
@@ -138,8 +141,9 @@ ggplot(data = df_seg3, aes(x_mm, y_mm)) +
               list(geom_path(data = arena_coordinates, aes_string(x = "x", y = "y"))) +
               theme(text = element_text(size = 6)) +
               facet_grid(.~SegmentID)
+fig_nums("three_segments_separately", "Three segments displayed separetely.", display = F)
 ```
-
+`r fig_nums("three_segments_separately")`
 
 # Voting
 
@@ -150,3 +154,5 @@ K-means cluster analysis was performed to find the natural groupings of segments
 <!-- Insert the session information into the document -->
 ```{r session-info}
 ```
+
+# References
