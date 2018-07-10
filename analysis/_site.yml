@@ -11,6 +11,8 @@ navbar:
     href: Introduction.html
   - text: Methods
     href: methods.html
+  - text: Acknowledgements
+    href: acknowledgements.html
   right:
   - icon: fa-github
     href: https://github.com/jdblischak/workflowr

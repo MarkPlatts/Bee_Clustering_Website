@@ -5,8 +5,9 @@ date: 2018-03-03
 output: html_document
 ---
 
-Welcome to my research website about a project that I did analysing the behaviour of bees using k-means cluster analysis, a popular machine learning method.
+Welcome to my research website for a project to analyse the behaviour of bees using k-means cluster analysis, a popular machine learning method.
 
 The site has been structured loosely as a science paper. By clicking on the links at the top you can get to the various sections you would often find in science paper. Feel free to browse as you wish and if you have any questions or want to comment on anything I'd love for you to get in touch. I especially welcome feedback and constructive criticism!
+
 
 

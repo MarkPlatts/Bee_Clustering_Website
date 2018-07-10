@@ -76,13 +76,12 @@ The central displacement is specified as the distance between the centre of the 
 The path efficiency is specified as:
 $$P=\frac{\sqrt{(x_n-x_1)^2+(y_n-y_1)^2}}{\sum^n_{i=1}\sqrt{(x_{i+1}-x_i)^2+(y_{i+1}-y_i)^2}}$$
 Where $x_i$ and $y_i$ are ith x and y coordinates of the segment respectively and n is the number of points in the segment.
-intuitively, it can be thought of as how directly the segment moves from one location to another. 
-(https://www.sciencedirect.com/science/article/pii/S0889159115300398)
+intuitively, it can be thought of as how directly the segment moves from one location to another [@ILLOUZ2016132].
 
 ###Sum of absolute angles
 The sum of absolute angles is specified as:
 $$S=\sum\arccos\left(\frac{\langle{\bar{u}},\bar{v} \rangle}{||\bar{u}||.||\bar{v}||}\right)$$
-Where $\bar{u}$ and $\bar{v}$ are sequential vectors. (https://www.sciencedirect.com/science/article/pii/S0889159115300398)
+Where $\bar{u}$ and $\bar{v}$ are sequential vectors [@ILLOUZ2016132].
 
 ## Intermediate calculations
 ###Calculating the position of the centre of the arena
@@ -97,7 +96,7 @@ The minimum enclosing ellipse was computed using the Khachiyan Algorithm. Code f
 # Segmenting the bees path
 
 A bee's path is defined as he entire path from beginning to end for a single instance of the experiment (`r fig_nums("full_path", display = "cite")`).
-```{r, echo = F}
+```{r, echo = F, cache=TRUE}
 df_xy <- read.csv(here::here("data/length100/segment_xys.csv"))
 arena_coordinates <- draw_arena(xy = df_xy)
 ```
@@ -113,7 +112,7 @@ fig_nums("full_path", "The full path of a bee in a single experiment.", display 
 ```
 `r fig_nums("full_path")`
 
-This was split up into segments of a uniform length where each consecutive segment overlapped the previous segment by 70% of its length. `r fig_nums("three_segments_overlapping", display = "cite")` shows 3 overlapping segments and `r fig_nums("three_segments_separately", display = "cite")`.
+This was split up into segments of a uniform length where each consecutive segment overlapped the previous segment by 70% of its length. `r fig_nums("three_segments_overlapping", display = "cite")` shows 3 overlapping segments and `r fig_nums("three_segments_separately", display = "cite")` displays these 3 segments separately.
 
 ```{r, echo = F, fig.width=4, fig.height=5}
 segID3 <- unique(df_xy$SegmentID)[1:3]
@@ -134,7 +133,7 @@ fig_nums("three_segments_overlapping", "Three overlapping segments from the full
 ```
 `r fig_nums("three_segments_overlapping")`
 
-```{r, echo = FALSE, fig.height=3, fig.width=12}
+```{r, echo = FALSE, fig.height=2.5, fig.width=6}
 ggplot(data = df_seg3, aes(x_mm, y_mm)) +
               geom_path() +
               coord_cartesian(xlim = c(80,240), ylim = c(0,200)) +
@@ -145,9 +144,9 @@ fig_nums("three_segments_separately", "Three segments displayed separetely.", di
 ```
 `r fig_nums("three_segments_separately")`
 
-# Voting
+# Majority voting
 
-K-means cluster analysis was performed to find the natural groupings of segments according to the above extracted features. For each point a vote was taken from each segment that overlapped that position and the point assigned to the cluster with the most votes. Points where two or more cluster groups tied, were considered unidentified.
+Since segments overlapped it was necessary to resolve the issue where overlapping segments belonged to different clusters. We used a majority voting approach similar to the one used in [2017arXiv171107446V], but without using weights since we do not know the classes. K-means cluster analysis was performed to find the natural groupings of segments according to the above extracted features. For each point a vote was taken from each segment that overlapped that position and the point assigned to the cluster with the most votes. Points where two or more cluster groups tied, were considered unidentified. 
 
 # Session information
 
