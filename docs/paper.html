@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+<meta name="author" content="Mark Platts" />
+
+<meta name="date" content="2018-03-03" />
+
+<title>Methods</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/journal.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-4.5.0/css/font-awesome.min.css" rel="stylesheet" />
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 61px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 66px;
+  margin-top: -66px;
+}
+
+.section h2 {
+  padding-top: 66px;
+  margin-top: -66px;
+}
+.section h3 {
+  padding-top: 66px;
+  margin-top: -66px;
+}
+.section h4 {
+  padding-top: 66px;
+  margin-top: -66px;
+}
+.section h5 {
+  padding-top: 66px;
+  margin-top: -66px;
+}
+.section h6 {
+  padding-top: 66px;
+  margin-top: -66px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+  padding-left: 25px;
+  text-indent: 0;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Bee Cluster Analysis</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="overview.html">Overview</a>
+</li>
+<li>
+  <a href="paper.html">Paper</a>
+</li>
+<li>
+  <a href="python.html">N Clusters</a>
+</li>
+<li>
+  <a href="acknowledgements.html">Acknowledgements</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://github.com/jdblischak/workflowr">
+    <span class="fa fa-github"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+<!-- Add a small amount of space between sections. -->
+<style type="text/css">
+div.section {
+  padding-top: 12px;
+}
+</style>
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Methods</h1>
+<h4 class="author"><em>Mark Platts</em></h4>
+<h4 class="date"><em>2018-03-03</em></h4>
+
+</div>
+
+
+<pre class="r"><code>fig_nums &lt;- captioner()</code></pre>
+<div id="introduction" class="section level1">
+<h1>Introduction</h1>
+<div id="project-goal" class="section level2">
+<h2>Project goal</h2>
+<p>The goal of this project was to extract the common behavioural patterns of bees in an experiment which shared similarities to the morris water maze experiment. Cluster analysis has previously been applied successfully to the morris water maze experiment to provide insight into how rodents behave at a fine grain resolution. The goal of this project was to investigate whether similar techniques were generalizable to different experiments and species. In particular we wanted to analyse the behaviour of bees in an experiment adapted from the detour paradigm.</p>
+</div>
+<div id="the-adapted-detour-paradigm-experiment" class="section level2">
+<h2>The adapted detour paradigm experiment</h2>
+<p>In this experiment bees were placed in a circular arena in which they could only move in the x and y directions, but not vertically. Lights were then switched off and on at different positions along the edge of the arena. The bee’s position was tracked for the duration of the experiment, producing a dataset of x, y coordinates at uniform time intervals. The experiments were conducted for 3 different treatment groups (1) no treatment (2) treated with saline (3) treated with saline.</p>
+</div>
+</div>
+<div id="methods" class="section level1">
+<h1>Methods</h1>
+<div id="feature-extraction" class="section level2">
+<h2>Feature extraction</h2>
+<p>One of the central challenges of this project was to extract features from the bees recorded x,y coordinates, representing the data in a format that would enable typical behaviours to be detected using cluster analysis. Features were selected that were likely to capture the geometric and positional characteristics of a segment.</p>
+<div id="features" class="section level3">
+<h3>Features</h3>
+<div id="median-distance-from-the-centre" class="section level4">
+<h4>Median distance from the centre</h4>
+<p>This is the median Euclidean distance of a segment’s points from the centre of the arena scaled by the arena radius <span class="citation">(Tiago V. Gehring 2015)</span>.</p>
+</div>
+<div id="interquartile-range-of-the-distance-from-the-centre" class="section level4">
+<h4>Interquartile range of the distance from the centre</h4>
+<p>This is the difference between upper and lower quartile distances from the centre scaled by the arena radius <span class="citation">(Tiago V. Gehring 2015)</span>.</p>
+</div>
+<div id="focus" class="section level4">
+<h4>Focus</h4>
+<p>The focus is specified as: <span class="math display">\[f=1-\frac{4A}{\Pi d^2}\]</span> Where A is minimum enclosing ellipsoid around the segment and d is the segment length <span class="citation">(Tiago V. Gehring 2015)</span>.</p>
+</div>
+<div id="eccentricity" class="section level4">
+<h4>Eccentricity</h4>
+<p>The eccentricity is specified as:</p>
+<p>E=1-b<sup>2/a</sup>2 <span class="math display">\[E=1-\frac{b^2}{a^2}\]</span> Where a and b is semi-major axis and the semi-minor axis of the enclosing ellipse <span class="citation">(Tiago V. Gehring 2015)</span>.</p>
+</div>
+<div id="inner-radius-variation" class="section level4">
+<h4>Inner radius variation</h4>
+<p>The inner radius variation is specified as: <span class="math display">\[ v = \frac{(c_{UQ}-c_{LQ})}{c_{MED}} \]</span> Where <span class="math inline">\(c_{UQ}\)</span>, <span class="math inline">\(c_{LQ}\)</span> and <span class="math inline">\(c_{MED}\)</span> are the upper quartile, lower quartile and median for the distance from the centre of the minimum enclosing ellipse <span class="citation">(Tiago V. Gehring 2015)</span>.</p>
+</div>
+<div id="central-displacement" class="section level4">
+<h4>Central displacement</h4>
+<p>The central displacement is specified as the distance between the centre of the arena and the centre of the minimum enclosing ellipse <span class="citation">(Tiago V. Gehring 2015)</span>.</p>
+</div>
+<div id="path-efficiency" class="section level4">
+<h4>Path efficiency</h4>
+<p>The path efficiency is specified as: <span class="math display">\[P=\frac{\sqrt{(x_n-x_1)^2+(y_n-y_1)^2}}{\sum^n_{i=1}\sqrt{(x_{i+1}-x_i)^2+(y_{i+1}-y_i)^2}}\]</span> Where <span class="math inline">\(x_i\)</span> and <span class="math inline">\(y_i\)</span> are ith x and y coordinates of the segment respectively and n is the number of points in the segment. intuitively, it can be thought of as how directly the segment moves from one location to another <span class="citation">(Illouz et al. 2016)</span>.</p>
+</div>
+<div id="sum-of-absolute-angles" class="section level4">
+<h4>Sum of absolute angles</h4>
+<p>The sum of absolute angles is specified as: <span class="math display">\[S=\sum\arccos\left(\frac{\langle{\bar{u}},\bar{v} \rangle}{||\bar{u}||.||\bar{v}||}\right)\]</span> Where <span class="math inline">\(\bar{u}\)</span> and <span class="math inline">\(\bar{v}\)</span> are sequential vectors <span class="citation">(Illouz et al. 2016)</span>.</p>
+</div>
+</div>
+<div id="intermediate-calculations" class="section level3">
+<h3>Intermediate calculations</h3>
+<div id="calculating-the-position-of-the-centre-of-the-arena" class="section level4">
+<h4>Calculating the position of the centre of the arena</h4>
+<p>The centre of the arena was taken to be the midpoint between the max and min x and y coordinates in the entire dataset of points.</p>
+</div>
+<div id="calculating-the-diameter-of-the-arena" class="section level4">
+<h4>Calculating the diameter of the arena</h4>
+<p>The diameter of the arena was taken to be either the distance between the max and min Y coordinate or the max and min X coordinate, whichever was the greatest.</p>
+</div>
+<div id="determining-the-minimum-enclosing-ellipse" class="section level4">
+<h4>Determining the minimum enclosing ellipse</h4>
+<p>The minimum enclosing ellipse was computed using the Khachiyan Algorithm. Code from <a href="https://ecogenomics.github.io/GroopM/dev_docs/groopm.ellipsoid.EllipsoidTool-class.html" class="uri">https://ecogenomics.github.io/GroopM/dev_docs/groopm.ellipsoid.EllipsoidTool-class.html</a> was used with some modifications to work for 2d data.</p>
+</div>
+</div>
+</div>
+<div id="segmenting-the-bees-path" class="section level2">
+<h2>Segmenting the bees path</h2>
+<p>A bee’s path is defined as he entire path from beginning to end for a single instance of the experiment (Figure 1).</p>
+<p><img src="paper_files/figure-html/unnamed-chunk-4-1.png" width="384" /> Figure 1: The full path of a bee in a single experiment.</p>
+<p>This was split up into segments of a uniform length where each consecutive segment overlapped the previous segment by 70% of its length. Figure 2 shows 3 overlapping segments while Figure 3 shows them separately.</p>
+<p><img src="paper_files/figure-html/unnamed-chunk-5-1.png" width="384" /> Figure 2: Three overlapping segments from the full bee’s path.</p>
+<p><img src="paper_files/figure-html/unnamed-chunk-6-1.png" width="576" /> Figure 3: Three segments displayed separetely.</p>
+</div>
+<div id="majority-voting" class="section level2">
+<h2>Majority voting</h2>
+<p>Since segments overlapped it was necessary to resolve the issue where overlapping segments belonged to different clusters. We used a majority voting approach similar to the one used in <span class="citation">(Avgoustinos Vouros 2017)</span>, but without weights since we do not know the classes. K-means cluster analysis was performed to find the natural groupings of segments according to the above extracted features. For each point a vote was taken from each segment that overlapped that position and the point assigned to the cluster with the most votes. Points where two or more cluster groups tied, were considered unidentified.</p>
+</div>
+</div>
+<div id="session-information" class="section level1">
+<h1>Session information</h1>
+<!-- Insert the session information into the document -->
+</div>
+<div id="references" class="section level1 unnumbered">
+<h1>References</h1>
+<div id="refs" class="references">
+<div id="ref-2017arXiv171107446V">
+<p>Avgoustinos Vouros, Kinga Szydlowska, Tiago V. Gehring. 2017. “A Generalised Framework for Detailed Classification of Swimming Paths Inside the Morris Water Maze.” <em>ArXiv E-Prints</em>, November.</p>
+</div>
+<div id="ref-ILLOUZ2016132">
+<p>Illouz, Tomer, Ravit Madar, Yoram Louzon, Kathleen J. Griffioen, and Eitan Okun. 2016. “Unraveling Cognitive Traits Using the Morris Water Maze Unbiased Strategy Classification (Must-c) Algorithm.” <em>Brain, Behavior, and Immunity</em> 52: 132–44. doi:<a href="https://doi.org/https://doi.org/10.1016/j.bbi.2015.10.013">https://doi.org/10.1016/j.bbi.2015.10.013</a>.</p>
+</div>
+<div id="ref-tiagogehringetal2015-bibtexing">
+<p>Tiago V. Gehring, Carmen Sandi &amp; Eleni Vasilaki, Gediminas Luksys. 2015. “Detailed Classification of Swimming Paths in the Morris Water Maze: Multiple Strategies Within One Trial.” <em>Scientific Reports</em> 5: 14562.</p>
+</div>
+</div>
+</div>
+
+<!-- Adjust MathJax settings so that all math formulae are shown using
+TeX fonts only; see
+http://docs.mathjax.org/en/latest/configuration.html.  This will make
+the presentation more consistent at the cost of the webpage sometimes
+taking slightly longer to load. Note that this only works because the
+footer is added to webpages before the MathJax javascript. -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    "HTML-CSS": { availableFonts: ["TeX"] }
+  });
+</script>
+
+<hr>
+<p>
+    This <a href="http://rmarkdown.rstudio.com">R Markdown</a> site was created with <a href="https://github.com/jdblischak/workflowr">workflowr</a>
+</p>
+<hr>
+
+<!-- To enable disqus, uncomment the section below and provide your disqus_shortname -->
+
+<!-- disqus
+  <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+        var disqus_shortname = 'rmarkdown'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+-->
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,35 @@
+---
+title: "Overview"
+author: "Mark Platts"
+date: "13 July 2018"
+output: html_document
+---
+
+```{r, echo = F, message=FALSE, warning=FALSE}
+library(here)
+library(dplyr)
+library(ggplot2)
+library(captioner)
+source("https://raw.githubusercontent.com/MarkPlatts/Bee_Behaviour_Cluster_Analysis/master/src/R/helper_functions.R")
+fig_nums <- captioner()
+```
+
+To get some idea of the problem this project solved take a look at these plots showing how a bee moved around in an experiment:
+
+```{r, echo = F, cache=TRUE}
+df_xy <- read.csv(here::here("data/length100/segment_xys.csv"))
+arena_coordinates <- draw_arena(xy = df_xy)
+```
+
+```{r, echo = F, fig.width=4, fig.height=5}
+df_first_path <- df_xy[df_xy$FileName == "2015-07-14-Sequence-CX-10-03", ]
+ggplot(data = droplevels(df_first_path), aes(x_mm, y_mm)) + 
+              geom_path() + 
+              coord_cartesian(xlim = c(80,240), ylim = c(0,200)) +
+              list(geom_path(data = arena_coordinates, aes_string(x = "x", y = "y"))) + 
+              theme(text = element_text(size = 6)) + theme(legend.position="none")
+fig_nums("full_path", "The full path of a bee in a single experiment.", display = F)
+```
+`r fig_nums("full_path")`
+
+

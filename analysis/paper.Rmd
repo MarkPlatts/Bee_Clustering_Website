@@ -6,97 +6,88 @@ output: html_document
 bibliography: bibliography.bibtex
 ---
 
-<!-- The file analysis/chunks.R contains chunks that define default settings
-shared across the workflowr files. -->
-```{r read-chunk, include=FALSE, cache=FALSE}
-knitr::read_chunk("chunks.R")
-```
-
-<!-- Update knitr chunk options -->
-```{r knitr-opts-chunk, include=FALSE}
-```
-
-<!-- Insert the date the file was last updated -->
-```{r last-updated, echo=FALSE, results='asis'}
-```
-
-<!-- Insert the code version (Git commit SHA1) if Git repository exists and R
- package git2r is installed -->
-```{r code-version, echo=FALSE, results='asis'}
-```
-
-<!-- Add your analysis here -->
-
-```{r, echo = F}
+```{r, echo = F, message=FALSE, warning=FALSE}
 library(here)
 library(dplyr)
 library(ggplot2)
 library(captioner)
 source("https://raw.githubusercontent.com/MarkPlatts/Bee_Behaviour_Cluster_Analysis/master/src/R/helper_functions.R")
 ```
+
 ```{r}
 fig_nums <- captioner()
 
 ```
+# Introduction
 
+## Project goal
 
-# Feature extraction
+The goal of this project was to extract the common behavioural patterns of bees in an experiment which shared similarities to the morris water maze experiment. Cluster analysis has previously been applied successfully to the morris water maze experiment to provide insight into how rodents behave at a fine grain resolution. The goal of this project was to investigate whether similar techniques were generalizable to different experiments and  species. In particular we wanted to analyse the behaviour of bees in an experiment adapted from the detour paradigm.
+
+## The adapted detour paradigm experiment 
+
+In this experiment bees were placed in a circular arena in which they could only move in the x and y directions, but not vertically. Lights were then switched off and on at different positions along the edge of the arena. The bee's position was tracked for the duration of the experiment, producing a dataset of x, y coordinates at uniform time intervals. The experiments were conducted for 3 different treatment groups (1) no treatment (2) treated with saline (3) treated with saline.
+
+# Methods
+
+## Feature extraction
 
 One of the central challenges of this project was to extract features from the bees recorded x,y coordinates, representing the data in a format that would enable typical behaviours to be detected using cluster analysis. Features were selected that were likely to capture the geometric and positional characteristics of a segment.
 
-##Features
+###Features
 
-###Median distance from the centre
+####Median distance from the centre
 This is the median Euclidean distance of a segment's points from the centre of the arena scaled by the arena radius [@tiagogehringetal2015-bibtexing].
 
-###Interquartile range of the distance from the centre
+####Interquartile range of the distance from the centre
 This is the difference between upper and lower quartile distances from the centre scaled by the arena radius [@tiagogehringetal2015-bibtexing].
 
-###Focus
+####Focus
 The focus is specified as:
 $$f=1-\frac{4A}{\Pi d^2}$$
 Where A is minimum enclosing ellipsoid around the segment and d is the segment length [@tiagogehringetal2015-bibtexing].
 
-###Eccentricity
+####Eccentricity
 The eccentricity is specified as:
 
 E=1-b^2/a^2 
 $$E=1-\frac{b^2}{a^2}$$
 Where a and b is semi-major axis and the semi-minor axis of the enclosing ellipse [@tiagogehringetal2015-bibtexing].
 
-###Inner radius variation
+####Inner radius variation
 The inner radius variation is specified as:
 $$ v = \frac{(c_{UQ}-c_{LQ})}{c_{MED}} $$
 Where $c_{UQ}$, $c_{LQ}$ and $c_{MED}$  are the upper quartile, lower quartile and median for the distance from the centre of the minimum enclosing ellipse [@tiagogehringetal2015-bibtexing].
 
-###Central displacement
+####Central displacement
 The central displacement is specified as the distance between the centre of the arena and the centre of the minimum enclosing ellipse [@tiagogehringetal2015-bibtexing].
 
-###Path efficiency
+####Path efficiency
 The path efficiency is specified as:
 $$P=\frac{\sqrt{(x_n-x_1)^2+(y_n-y_1)^2}}{\sum^n_{i=1}\sqrt{(x_{i+1}-x_i)^2+(y_{i+1}-y_i)^2}}$$
 Where $x_i$ and $y_i$ are ith x and y coordinates of the segment respectively and n is the number of points in the segment.
 intuitively, it can be thought of as how directly the segment moves from one location to another [@ILLOUZ2016132].
 
-###Sum of absolute angles
+####Sum of absolute angles
 The sum of absolute angles is specified as:
 $$S=\sum\arccos\left(\frac{\langle{\bar{u}},\bar{v} \rangle}{||\bar{u}||.||\bar{v}||}\right)$$
 Where $\bar{u}$ and $\bar{v}$ are sequential vectors [@ILLOUZ2016132].
 
-## Intermediate calculations
-###Calculating the position of the centre of the arena
+### Intermediate calculations
+####Calculating the position of the centre of the arena
 The centre of the arena was taken to be the midpoint between the max and min x and y coordinates in the entire dataset of points.
 
-### Calculating the diameter of the arena
+#### Calculating the diameter of the arena
 The diameter of the arena was taken to be either the distance between the max and min Y coordinate or the max and min X coordinate, whichever was the greatest.
 
-###Determining the minimum enclosing ellipse
+####Determining the minimum enclosing ellipse
 The minimum enclosing ellipse was computed using the Khachiyan Algorithm. Code from https://ecogenomics.github.io/GroopM/dev_docs/groopm.ellipsoid.EllipsoidTool-class.html was used with some modifications to work for 2d data.
 
-# Segmenting the bees path
+## Segmenting the bees path
 
 A bee's path is defined as he entire path from beginning to end for a single instance of the experiment (`r fig_nums("full_path", display = "cite")`).
 ```{r, echo = F, cache=TRUE}
+source("https://raw.githubusercontent.com/MarkPlatts/Bee_Behaviour_Cluster_Analysis/master/src/R/helper_functions.R")
 df_xy <- read.csv(here::here("data/length100/segment_xys.csv"))
 arena_coordinates <- draw_arena(xy = df_xy)
 ```
@@ -144,7 +135,7 @@ fig_nums("three_segments_separately", "Three segments displayed separetely.", di
 ```
 `r fig_nums("three_segments_separately")`
 
-# Majority voting
+## Majority voting
 
 Since segments overlapped it was necessary to resolve the issue where overlapping segments belonged to different clusters. We used a majority voting approach similar to the one used in [@2017arXiv171107446V], but without weights since we do not know the classes. K-means cluster analysis was performed to find the natural groupings of segments according to the above extracted features. For each point a vote was taken from each segment that overlapped that position and the point assigned to the cluster with the most votes. Points where two or more cluster groups tied, were considered unidentified. 
 

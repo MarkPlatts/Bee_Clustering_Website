@@ -3,7 +3,7 @@ output_dir: ../docs
 include: .nojekyll
 exclude: include
 navbar:
-  title: Bee Clustering Analysis
+  title: Bee Cluster Analysis
   left:
   - text: Home
     href: index.html
