@@ -13,7 +13,7 @@
 
 <meta name="date" content="2018-07-12" />
 
-<title>python</title>
+<title>Number of Clusters</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -288,7 +288,7 @@ div.tocify {
   <a href="methods.html">Methods</a>
 </li>
 <li>
-  <a href="python.html">Python</a>
+  <a href="python.html">N Clusters</a>
 </li>
 <li>
   <a href="acknowledgements.html">Acknowledgements</a>
@@ -316,14 +316,13 @@ div.section {
 
 
 
-<h1 class="title toc-ignore">python</h1>
+<h1 class="title toc-ignore">Number of Clusters</h1>
 <h4 class="author"><em>Mark Platts</em></h4>
 <h4 class="date"><em>12 July 2018</em></h4>
 
 </div>
 
 
-<p><a href="2018-01-11-mp-Cluster-Analysis.html">link</a></p>
 <!DOCTYPE html>
 <html>
 <head><meta charset="utf-8" />
@@ -12077,21 +12076,21 @@ div#notebook {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Bee's-cluster-analysis">Bee's cluster analysis<a class="anchor-link" href="#Bee's-cluster-analysis">&#182;</a></h1><p>The main purpose of this analysis is to determine the optimum number of clusters.</p>
+<p>The main purpose of this analysis is to determine the optimum number of clusters.</p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[12]:</div>
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
 
 <span class="kn">from</span> <span class="nn">os</span> <span class="kn">import</span> <span class="n">getcwd</span><span class="p">,</span> <span class="n">chdir</span>
 <span class="n">wd</span> <span class="o">=</span> <span class="n">getcwd</span><span class="p">()</span>
-<span class="n">chdir</span><span class="p">(</span><span class="n">wd</span> <span class="o">+</span> <span class="s2">&quot;/../../src/py&quot;</span><span class="p">)</span>
+<span class="n">chdir</span><span class="p">(</span><span class="n">wd</span> <span class="o">+</span> <span class="s2">&quot;/../py&quot;</span><span class="p">)</span>
 
 <span class="kn">import</span> <span class="nn">perform_kmeans</span> <span class="kn">as</span> <span class="nn">pkm</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
@@ -12101,6 +12100,7 @@ div#notebook {
 <span class="kn">import</span> <span class="nn">find_opt_nclusters_seg_length</span>
 <span class="kn">import</span> <span class="nn">find_n_neighbours</span> <span class="kn">as</span> <span class="nn">n_neigh</span>
 <span class="kn">import</span> <span class="nn">cluster_analysis</span>
+<span class="kn">import</span> <span class="nn">produce_labelled_cluster_files</span> <span class="kn">as</span> <span class="nn">pcf</span>
 <span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">HTML</span>
 </pre></div>
 
@@ -12111,7 +12111,7 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[11]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="n">HTML</span><span class="p">(</span><span class="s1">&#39;&#39;&#39;&lt;script&gt;</span>
@@ -12134,34 +12134,6 @@ div#notebook {
 </div>
 </div>
 
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area"><div class="prompt output_prompt">Out[11]:</div>
-
-<div class="output_html rendered_html output_subarea output_execute_result">
-<script>
-code_show=true; 
-function code_toggle() {
- if (code_show){
- $('div.input').hide();
- } else {
- $('div.input').show();
- }
- code_show = !code_show
-} 
-$( document ).ready(code_toggle);
-</script>
-The raw code for this IPython notebook is by default hidden for easier reading.
-To toggle on/off the raw code, click <a href="javascript:code_toggle()">here</a>.
-</div>
-
-</div>
-
-</div>
-</div>
-
 </div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="prompt input_prompt">
@@ -12176,7 +12148,7 @@ To toggle on/off the raw code, click <a href="javascript:code_toggle()">here</a>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[15]:</div>
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="n">find_opt_nclusters_seg_length</span><span class="o">.</span><span class="n">perform_silhouette_analysis</span><span class="p">(</span><span class="n">path</span> <span class="o">=</span> <span class="s2">&quot;../../&quot;</span><span class="p">,</span>
@@ -12266,7 +12238,7 @@ n_clusters = 10   Avg silhouette_score = 0.273360390918
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[22]:</div>
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="n">n_nearest_neighbours</span> <span class="o">=</span> <span class="mi">6</span>
@@ -12288,7 +12260,7 @@ n_clusters = 10   Avg silhouette_score = 0.273360390918
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[21]:</div>
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
@@ -25352,10 +25324,11 @@ YRiGYRhGGWYkG4ZhGIZhGEYZ/w+IyDiv5t3oIQAAAABJRU5ErkJggg==
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Conclusion">Conclusion<a class="anchor-link" href="#Conclusion">&#182;</a></h2><p>I believe there are several candidates for a good length and number of clusters. These are:</p>
 <ul>
+<li>100mm &amp; 5 clusters</li>
 <li>150mm &amp; 5 clusters</li>
-<li>300mm &amp; 2 clusters</li>
 <li>200mm &amp; 4 clusters</li>
 <li>250mm &amp; 4 clusters</li>
+<li>300mm &amp; 2 clusters</li>
 </ul>
 <p>Although there are clear distinctions between segments in the shorter length segments, I'm unsure that they contain enough information to deem them strategies.</p>
 <p>The 300mm &amp; 2 clusters initially might not seem like a great choice since we aren't identifying many types of behaviour. That being said, I think that bee behaviour is going to be more simplistic than the rodent behaviour and so perhaps this is the best we can do. There's also a chance that when we are find more clusters for other segment lengths, what we are finding is just regular movement patterns that don't indicate a strategy. This line of thinking however, is far from conclusive.</p>
@@ -25363,6 +25336,33 @@ YRiGYRhGGWYkG4ZhGIZhGEYZ/w+IyDiv5t3oIQAAAABJRU5ErkJggg==
 
 </div>
 </div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Produce-the-files-for-further-analysis">Produce the files for further analysis<a class="anchor-link" href="#Produce-the-files-for-further-analysis">&#182;</a></h2><p>To plot the proportion of the trajectory that exhibited the behaviour associated with about clustering regimes, we need additional files. These files are then fed into a couple of R scripts to produce the plots.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[30]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython2"><pre><span></span><span class="n">pcf</span><span class="o">.</span><span class="n">create_file_with_cluster_membership</span><span class="p">(</span><span class="n">seg_length</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="n">n_clusters</span> <span class="o">=</span> <span class="mi">5</span><span class="p">)</span>
+<span class="n">pcf</span><span class="o">.</span><span class="n">create_file_with_cluster_membership</span><span class="p">(</span><span class="n">seg_length</span> <span class="o">=</span> <span class="mi">150</span><span class="p">,</span> <span class="n">n_clusters</span> <span class="o">=</span> <span class="mi">5</span><span class="p">)</span>
+<span class="n">pcf</span><span class="o">.</span><span class="n">create_file_with_cluster_membership</span><span class="p">(</span><span class="n">seg_length</span> <span class="o">=</span> <span class="mi">200</span><span class="p">,</span> <span class="n">n_clusters</span> <span class="o">=</span> <span class="mi">4</span><span class="p">)</span>
+<span class="n">pcf</span><span class="o">.</span><span class="n">create_file_with_cluster_membership</span><span class="p">(</span><span class="n">seg_length</span> <span class="o">=</span> <span class="mi">250</span><span class="p">,</span> <span class="n">n_clusters</span> <span class="o">=</span> <span class="mi">4</span><span class="p">)</span>
+<span class="n">pcf</span><span class="o">.</span><span class="n">create_file_with_cluster_membership</span><span class="p">(</span><span class="n">seg_length</span> <span class="o">=</span> <span class="mi">300</span><span class="p">,</span> <span class="n">n_clusters</span> <span class="o">=</span> <span class="mi">2</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
 </div>
     </div>
   </div>

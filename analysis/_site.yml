@@ -11,7 +11,7 @@ navbar:
     href: Introduction.html
   - text: Methods
     href: methods.html
-  - text: Python
+  - text: N Clusters
     href: python.html
   - text: Acknowledgements
     href: acknowledgements.html
