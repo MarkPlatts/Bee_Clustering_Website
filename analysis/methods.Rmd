@@ -112,7 +112,7 @@ fig_nums("full_path", "The full path of a bee in a single experiment.", display 
 ```
 `r fig_nums("full_path")`
 
-This was split up into segments of a uniform length where each consecutive segment overlapped the previous segment by 70% of its length. `r fig_nums("three_segments_overlapping", display = "cite")` shows 3 overlapping segments and `r fig_nums("three_segments_separately", display = "cite")` displays these 3 segments separately.
+This was split up into segments of a uniform length where each consecutive segment overlapped the previous segment by 70% of its length. `r fig_nums("three_segments_overlapping", display = "cite")` shows 3 overlapping segments while `r fig_nums("three_segments_separately", display = "cite")` shows them separately.
 
 ```{r, echo = F, fig.width=4, fig.height=5}
 segID3 <- unique(df_xy$SegmentID)[1:3]
@@ -146,7 +146,7 @@ fig_nums("three_segments_separately", "Three segments displayed separetely.", di
 
 # Majority voting
 
-Since segments overlapped it was necessary to resolve the issue where overlapping segments belonged to different clusters. We used a majority voting approach similar to the one used in [2017arXiv171107446V], but without using weights since we do not know the classes. K-means cluster analysis was performed to find the natural groupings of segments according to the above extracted features. For each point a vote was taken from each segment that overlapped that position and the point assigned to the cluster with the most votes. Points where two or more cluster groups tied, were considered unidentified. 
+Since segments overlapped it was necessary to resolve the issue where overlapping segments belonged to different clusters. We used a majority voting approach similar to the one used in [@2017arXiv171107446V], but without weights since we do not know the classes. K-means cluster analysis was performed to find the natural groupings of segments according to the above extracted features. For each point a vote was taken from each segment that overlapped that position and the point assigned to the cluster with the most votes. Points where two or more cluster groups tied, were considered unidentified. 
 
 # Session information
 
