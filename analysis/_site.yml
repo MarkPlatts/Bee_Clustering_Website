@@ -7,10 +7,10 @@ navbar:
   left:
   - text: Home
     href: index.html
-  - text: Introduction
-    href: Introduction.html
-  - text: Methods
-    href: methods.html
+  - text: Overview
+    href: overview.html
+  - text: Paper
+    href: paper.html
   - text: N Clusters
     href: python.html
   - text: Acknowledgements
