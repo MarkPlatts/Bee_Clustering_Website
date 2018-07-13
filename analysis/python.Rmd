@@ -1,14 +1,11 @@
 ---
-title: "python"
+title: "Number of Clusters"
 author: "Mark Platts"
 date: "12 July 2018"
 output: html_document
 ---
 
-[link](2018-01-11-mp-Cluster-Analysis.html)
-
-
 ```{r, echo = FALSE}
-htmltools::includeHTML("../code/Jupyter/2018-01-11-mp-Cluster-Analysis.html")
+htmltools::includeHTML("../code/Jupyter/2018-07-13-mp-Cluster-Analysis.html")
 ```
 

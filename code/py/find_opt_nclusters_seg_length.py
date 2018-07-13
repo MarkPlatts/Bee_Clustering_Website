@@ -30,7 +30,7 @@ def perform_silhouette_analysis(path, segment_lengths, range_nclusters, plot_sil
         if plot_silhouette:
             fig = plt.figure(1)
     
-        df_features = pd.read_csv(os.path.join(path, "Data/length" + str(iseg_length) + "/segment_features.csv"))
+        df_features = pd.read_csv(os.path.join(path, "data/length" + str(iseg_length) + "/segment_features.csv"))
         #df_xys      = pd.read_csv(os.path.join(path, "Data/length" + str(iseg_length) + "/segment_xys.csv"))
         
         numpy_features = df_features.iloc[:,4:12].values
