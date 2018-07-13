@@ -14,7 +14,7 @@ source("https://raw.githubusercontent.com/MarkPlatts/Bee_Behaviour_Cluster_Analy
 fig_nums <- captioner()
 ```
 
-To get some idea of the problem this project solved take a look at these plots showing how a bee moved around in an experiment:
+To get some intuition of the problem this project solved take a look at these plots showing how a bee moved around in an experiment:
 
 ```{r, echo = F, cache=TRUE}
 df_xy <- read.csv(here::here("data/length100/segment_xys.csv"))
@@ -28,8 +28,23 @@ ggplot(data = droplevels(df_first_path), aes(x_mm, y_mm)) +
               coord_cartesian(xlim = c(80,240), ylim = c(0,200)) +
               list(geom_path(data = arena_coordinates, aes_string(x = "x", y = "y"))) + 
               theme(text = element_text(size = 6)) + theme(legend.position="none")
-fig_nums("full_path", "The full path of a bee in a single experiment.", display = F)
+fig_nums("full_path_NT", "The full path of a bee in a single experiment.", display = F)
 ```
+
 `r fig_nums("full_path")`
+
+From this it is very difficult to determine meaningful patterns.
+
+And what if we treat the bee's with Saline? Can we see any difference?
+
+```{r, echo = F, fig.width=4, fig.height=5}
+df_first_path <- df_xy[df_xy$FileName == "2015-09-26_Sequence-CX_30_01 2015-09-28_Sequence-CX_30_05", ]
+ggplot(data = droplevels(df_first_path), aes(x_mm, y_mm)) + 
+              geom_path() + 
+              coord_cartesian(xlim = c(80,240), ylim = c(0,200)) +
+              list(geom_path(data = arena_coordinates, aes_string(x = "x", y = "y"))) + 
+              theme(text = element_text(size = 6)) + theme(legend.position="none")
+fig_nums("full_path_saline", "The full path of a bee in a single experiment, treated with saline.", display = F)
+```
 
 

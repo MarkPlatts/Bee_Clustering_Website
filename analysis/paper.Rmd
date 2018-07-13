@@ -12,12 +12,9 @@ library(dplyr)
 library(ggplot2)
 library(captioner)
 source("https://raw.githubusercontent.com/MarkPlatts/Bee_Behaviour_Cluster_Analysis/master/src/R/helper_functions.R")
-```
-
-```{r}
 fig_nums <- captioner()
-
 ```
+
 # Introduction
 
 ## Project goal
