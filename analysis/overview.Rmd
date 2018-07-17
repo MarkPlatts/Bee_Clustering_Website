@@ -10,9 +10,13 @@ library(here)
 library(dplyr)
 library(ggplot2)
 library(captioner)
+library(data.table)
 source("https://raw.githubusercontent.com/MarkPlatts/Bee_Clustering_Website/master/code/R/helper_functions.R")
 fig_nums <- captioner()
-df_xy <- read.csv(here::here("data/length100/segment_xys.csv"))
+# df_xy <- read.csv(here::here("data/length100/segment_xys.csv"))
+df <- fread(here::here("data/length150/segment_features.csv"),
+            stringsAsFactors = TRUE)
+df_xy <- read.csv(here::here("data/length150/segment_xys.csv"))
 arena_coordinates <- draw_arena(xy = df_xy)
 ```
 
@@ -34,22 +38,20 @@ By using the ML method in this project, we automated this process and discovered
 
 To demonstrate this idea, here are plots for 5 possible types of behaviour that we discovered if we chopped the entire bee's path up into 150mm lengths:
 
-```{r}
-
-library(data.table)
-df <- fread(here::here("data/length150/segment_features.csv"),
-            stringsAsFactors = TRUE)
-df_xy <- read.csv(here::here("data/length150/segment_xys.csv"))
+```{r, echo=FALSE, cache=TRUE}
 set.seed(1) #the following code take a random sample of the segments
 scaled_df <- scale(df[, MedianDistanceFromCentre:SumAbsoluteAngles])
 km.out <- kmeans(x = scaled_df, centers = 5, nstart = 20)
 df[, cluster := km.out$cluster]
 ```
 
-```{r, fig.width=7,fig.height=8}
+```{r, echo=FALSE, fig.width=7,fig.height=8, message=FALSE}
 source("https://raw.githubusercontent.com/MarkPlatts/Bee_Clustering_Website/master/code/R/helper_functions.R")
 plot_cluster(features = df, xy = as.data.table(df_xy), kmean_mod = km.out, nSegments = 5)
 ```
+
+By looking at these samples we can now start to form hypothesis for how the bee is behaving at different points within the experiments.
+
 
 
 

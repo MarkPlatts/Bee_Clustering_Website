@@ -33,7 +33,7 @@ plot_cluster <- function(features, xy, kmean_mod, nSegments){
               xlim(60, 240) + ylim(0,200) +
               list(geom_path(data = arena, aes_string(x = "x", y = "y"))) +
               ggtitle(paste0("Cluster: ", iCluster)) +
-              theme(text = element_text(size = 6))
+              theme_bw(text = element_text(size = 6))
       }
   }
 
