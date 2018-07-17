@@ -323,12 +323,34 @@ div.section {
 </div>
 
 
-<p>To get some intuition of the problem this project solved take a look at these plots showing how a bee moved around in an experiment:</p>
-<p><img src="overview_files/figure-html/unnamed-chunk-3-1.png" width="384" /></p>
-<p>Figure 2:</p>
-<p>From this it is very difficult to determine meaningful patterns.</p>
-<p>And what if we treat the bee’s with Saline? Can we see any difference?</p>
-<p><img src="overview_files/figure-html/unnamed-chunk-4-1.png" width="384" /></p>
+<p>The goal of this project was to try and detect common movement patterns that bee’s exhibited throughout an experiment. We had a dataset that contained the x and y coordinates of bees recorded throughout multiple experiments. Here is a plot that showing the movement of a bee in a single experiment:</p>
+<p><img src="overview_files/figure-html/unnamed-chunk-2-1.png" width="384" /></p>
+<p>What can we say about a bee’s movement throughout this experiment? We can say that the bee spent more time at the edges of the arena and that generally when the bee traversed the center it did so in a straight line. If we break the path of the bee up into smaller segments we might be able to learn more, but this could take quite a bit of time to do.</p>
+<p>By using the ML method in this project, we automated this process and discovered possible categories of bee behaviour, as well as information on how the bees transition between these behaviours thoughout the experiment.</p>
+<p>To demonstrate this idea, here are plots for 5 possible types of behaviour that we discovered if we chopped the entire bee’s path up into 150mm lengths:</p>
+<pre class="r"><code>library(data.table)</code></pre>
+<pre><code>## Warning: package &#39;data.table&#39; was built under R version 3.4.4</code></pre>
+<pre><code>## 
+## Attaching package: &#39;data.table&#39;</code></pre>
+<pre><code>## The following objects are masked from &#39;package:dplyr&#39;:
+## 
+##     between, first, last</code></pre>
+<pre class="r"><code>df &lt;- fread(here::here(&quot;data/length150/segment_features.csv&quot;),
+            stringsAsFactors = TRUE)
+df_xy &lt;- read.csv(here::here(&quot;data/length150/segment_xys.csv&quot;))
+set.seed(1) #the following code take a random sample of the segments
+scaled_df &lt;- scale(df[, MedianDistanceFromCentre:SumAbsoluteAngles])
+km.out &lt;- kmeans(x = scaled_df, centers = 5, nstart = 20)
+df[, cluster := km.out$cluster]</code></pre>
+<pre class="r"><code>source(&quot;https://raw.githubusercontent.com/MarkPlatts/Bee_Clustering_Website/master/code/R/helper_functions.R&quot;)
+plot_cluster(features = df, xy = as.data.table(df_xy), kmean_mod = km.out, nSegments = 5)</code></pre>
+<pre><code>## Loading required package: grid</code></pre>
+<p><img src="overview_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p>take a look at these plots showing how a bee moved around in parts of three experiments:</p>
+<p><img src="overview_files/figure-html/unnamed-chunk-5-1.png" width="192" /><img src="overview_files/figure-html/unnamed-chunk-5-2.png" width="192" /><img src="overview_files/figure-html/unnamed-chunk-5-3.png" width="192" /></p>
+<p>Figure 3: The full path of a bee in a single experiment, treated with saline.</p>
+<p>From this we could guess that there are some differences in the behaviour of Bee’s between the three experiments. The “no treatment” experiment has reasonable straight paths that are mainly distributed around the edge of the arena. The “procaine” experiment also has straight segments but covers much more of the area close to the centre of the arena. The “Saline” experiment seems to wind about much more and its not clear what areas of the arena it most covers.</p>
+<p>Ideally what we want is an analytic technique that can determine the differences in behaviour between these experiments as well as quantify them. By segmenting the paths of each experiment and performing a cluster analysis we can see at a finer scale the behaviours of a bee and perform better comparisons between experiments.</p>
 
 <!-- Adjust MathJax settings so that all math formulae are shown using
 TeX fonts only; see
