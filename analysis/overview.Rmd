@@ -5,13 +5,14 @@ date: "13 July 2018"
 output: html_document
 ---
 
-```{r, echo = F, message=FALSE, warning=FALSE, cache=TRUE}
+```{r, echo = F, message=FALSE, warning=FALSE}
 library(here)
 library(dplyr)
 library(ggplot2)
 library(captioner)
 library(data.table)
 source("https://raw.githubusercontent.com/MarkPlatts/Bee_Clustering_Website/master/code/R/helper_functions.R")
+source("https://raw.githubusercontent.com/MarkPlatts/Bee_Clustering_Website/master/code/R/plot_prop_each_cluster.R")
 fig_nums <- captioner()
 # df_xy <- read.csv(here::here("data/length100/segment_xys.csv"))
 df <- fread(here::here("data/length150/segment_features.csv"),
@@ -28,7 +29,7 @@ ggplot(data = droplevels(df_first_path), aes(x_mm, y_mm)) +
               geom_path() + 
               coord_cartesian(xlim = c(80,240), ylim = c(0,200)) +
               list(geom_path(data = arena_coordinates, aes_string(x = "x", y = "y"))) + 
-              theme(text = element_text(size = 6)) + theme(legend.position="none") +
+              theme_bw(base_size = 6) + theme(legend.position="none") +
               ggtitle("No treatment")
 ```
 
@@ -38,7 +39,7 @@ By using the ML method in this project, we automated this process and discovered
 
 To demonstrate this idea, here are plots for 5 possible types of behaviour that we discovered if we chopped the entire bee's path up into 150mm lengths:
 
-```{r, echo=FALSE, cache=TRUE}
+```{r, echo=FALSE}
 set.seed(1) #the following code take a random sample of the segments
 scaled_df <- scale(df[, MedianDistanceFromCentre:SumAbsoluteAngles])
 km.out <- kmeans(x = scaled_df, centers = 5, nstart = 20)
@@ -52,40 +53,10 @@ plot_cluster(features = df, xy = as.data.table(df_xy), kmean_mod = km.out, nSegm
 
 By looking at these samples we can now start to form hypothesis for how the bee is behaving at different points within the experiments.
 
+We can also calculate/plot how much of the time a bee spends in each cluster of behaviour. This is especially useful if we want to compare how the bee's behaviour changes as a result of different treatments:
 
-
-
- take a look at these plots showing how a bee moved around in parts of three experiments:
-
-```{r, echo = F, fig.width=2, fig.height=2.5}
-df_first_path <- head(df_xy[df_xy$FileName == "2015-07-14-Sequence-CX-10-03", ], n = 10000)
-ggplot(data = droplevels(df_first_path), aes(x_mm, y_mm)) + 
-              geom_path() + 
-              coord_cartesian(xlim = c(80,240), ylim = c(0,200)) +
-              list(geom_path(data = arena_coordinates, aes_string(x = "x", y = "y"))) + 
-              theme(text = element_text(size = 6)) + theme(legend.position="none") +
-              ggtitle("No treatment")
-fig_nums("full_path_NT", "The full path of a bee in a single experiment, treated with saline.", display = F)
-df_first_path <- head(df_xy[df_xy$FileName == "2015-09-28_Sequence-CX_30_02", ], n = 10000)
-ggplot(data = droplevels(df_first_path), aes(x_mm, y_mm)) + 
-              geom_path() + 
-              coord_cartesian(xlim = c(80,240), ylim = c(0,200)) +
-              list(geom_path(data = arena_coordinates, aes_string(x = "x", y = "y"))) + 
-              theme(text = element_text(size = 6)) + theme(legend.position="none") +
-              ggtitle("Procaine")
-fig_nums("full_path_procaine", "The full path of a bee in a single experiment.", display = F)
-df_first_path <- head(df_xy[df_xy$FileName == "2015-09-28_Sequence-CX_30_05", ], n = 10000)
-ggplot(data = droplevels(df_first_path), aes(x_mm, y_mm)) + 
-              geom_path() + 
-              coord_cartesian(xlim = c(80,240), ylim = c(0,200)) +
-              list(geom_path(data = arena_coordinates, aes_string(x = "x", y = "y"))) + 
-              theme(text = element_text(size = 6)) + theme(legend.position="none") +
-              ggtitle("Saline")
-fig_nums("part_three_experiments", "The full path of a bee in a single experiment, treated with saline.", display = F)
+```{r echo=FALSE}
+plot_prop_each_cluster(segment_length = 150, n_clusters = 5)
 ```
 
-`r fig_nums("part_three_experiments")`
-
-From this we could guess that there are some differences in the behaviour of Bee's between the three experiments. The "no treatment" experiment has reasonable straight paths that are mainly distributed around the edge of the arena. The "procaine" experiment also has straight segments but covers much more of the area close to the centre of the arena. The "Saline" experiment seems to wind about much more and its not clear what areas of the arena it most covers.
-
-Ideally what we want is an analytic technique that can determine the differences in behaviour between these experiments as well as quantify them. By segmenting the paths of each experiment and performing a cluster analysis we can see at a finer scale the behaviours of a bee and perform better comparisons between experiments.
+Combining this information with the cluster plots above we can say things like Procaine increases the amount of time that bees hardly move around, or that Procaine reduces the amount of time spent exploring smaller regions.

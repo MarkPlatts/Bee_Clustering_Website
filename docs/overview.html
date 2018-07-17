@@ -330,11 +330,9 @@ div.section {
 <p>To demonstrate this idea, here are plots for 5 possible types of behaviour that we discovered if we chopped the entire bee’s path up into 150mm lengths:</p>
 <p><img src="overview_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
 <p>By looking at these samples we can now start to form hypothesis for how the bee is behaving at different points within the experiments.</p>
-<p>take a look at these plots showing how a bee moved around in parts of three experiments:</p>
-<p><img src="overview_files/figure-html/unnamed-chunk-5-1.png" width="192" /><img src="overview_files/figure-html/unnamed-chunk-5-2.png" width="192" /><img src="overview_files/figure-html/unnamed-chunk-5-3.png" width="192" /></p>
-<p>Figure 3: The full path of a bee in a single experiment, treated with saline.</p>
-<p>From this we could guess that there are some differences in the behaviour of Bee’s between the three experiments. The “no treatment” experiment has reasonable straight paths that are mainly distributed around the edge of the arena. The “procaine” experiment also has straight segments but covers much more of the area close to the centre of the arena. The “Saline” experiment seems to wind about much more and its not clear what areas of the arena it most covers.</p>
-<p>Ideally what we want is an analytic technique that can determine the differences in behaviour between these experiments as well as quantify them. By segmenting the paths of each experiment and performing a cluster analysis we can see at a finer scale the behaviours of a bee and perform better comparisons between experiments.</p>
+<p>We can also calculate/plot how much of the time a bee spends in each cluster of behaviour. This is especially useful if we want to compare how the bee’s behaviour changes as a result of different treatments:</p>
+<p><img src="overview_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p>Combining this information with the cluster plots above we can say things like Procaine increases the amount of time that bees hardly move around, or that Procaine reduces the amount of time spent exploring smaller regions.</p>
 
 <!-- Adjust MathJax settings so that all math formulae are shown using
 TeX fonts only; see
