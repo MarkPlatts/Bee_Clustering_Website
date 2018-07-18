@@ -8,7 +8,7 @@ plot_prop_each_cluster <- function(segment_length, n_clusters){
   df$Cluster <- as.factor(df$cluster_won + 1)
   ggplot(data = df, aes(x = Experiment, fill = Cluster)) +
     geom_bar(position = "fill") +
-    ggtitle(paste0("Segment Length: ", segment_length)) +
+    ggtitle(paste0("Segment Length: ", segment_length, "mm")) +
     coord_flip() + labs(y = "Percentage of path", x = "Treatment") +
     theme_bw(base_size = 10)
 
