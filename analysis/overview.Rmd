@@ -21,7 +21,7 @@ df_xy <- read.csv(here::here("data/length150/segment_xys.csv"))
 arena_coordinates <- draw_arena(xy = df_xy)
 ```
 
-The goal of this project was to try and detect common movement patterns that bee's exhibited throughout an experiment. We had a dataset that contained the x and y coordinates of bees recorded throughout multiple experiments. Here is a plot that showing the movement of a bee in a single experiment:
+The goal of this project was to try and detect common movement patterns that bee's exhibited throughout an experiment. The dataset being analysed contained the x and y coordinates of bees recorded throughout multiple experiments. Here is a plot that showing the movement of a single bee in a single experiment:
 
 ```{r, echo = F, fig.width=4, fig.height=5}
 df_first_path <- df_xy[df_xy$FileName == "2015-07-14-Sequence-CX-10-03", ]
@@ -33,9 +33,9 @@ ggplot(data = droplevels(df_first_path), aes(x_mm, y_mm)) +
               ggtitle("No treatment")
 ```
 
-What can we say about a bee's movement throughout this experiment? We can say that the bee spent more time at the edges of the arena and that generally when the bee traversed the center it did so in a straight line. If we break the path of the bee up into smaller segments we might be able to learn more, but this could take quite a bit of time to do.
+From this plot alone it is difficult to obtain much valuable information on how the bee is behaving. We can say that the bee spent more time at the edges of the arena and that generally when the bee traversed the center it did so in a straight line, but beyond that nothing much more can be said. If the path of the bee is broken up into smaller segments and plotted we might be able to learn more, but this could take quite a bit of time to do.
 
-By using the ML method in this project, we automated this process and discovered possible categories of bee behaviour, as well as information on how the bees transition between these behaviours thoughout the experiment.
+In this project an analytical technique was applied to automate this process and discover possible categories of bee behaviour, as well as to calculate the total length of time bee's spent within each category of behaviour, under different treatments.
 
 To demonstrate this idea, here are plots for 5 possible types of behaviour that we discovered if we chopped the entire bee's path up into 150mm lengths:
 
@@ -47,16 +47,17 @@ df[, cluster := km.out$cluster]
 ```
 
 ```{r, echo=FALSE, fig.width=7,fig.height=8, message=FALSE}
-source("https://raw.githubusercontent.com/MarkPlatts/Bee_Clustering_Website/master/code/R/helper_functions.R")
 plot_cluster(features = df, xy = as.data.table(df_xy), kmean_mod = km.out, nSegments = 5)
 ```
 
-By looking at these samples we can now start to form hypothesis for how the bee is behaving at different points within the experiments.
+Each column contains a different possible behaviour with 5 different example segments. By looking at these samples we can now start to form hypothesis for how the bee is behaving at different points within the experiments. For example in cluster 3 we observe a bahviour known as thigmotaxis, where an animal wanders around the edge of the arena.
 
-We can also calculate/plot how much of the time a bee spends in each cluster of behaviour. This is especially useful if we want to compare how the bee's behaviour changes as a result of different treatments:
+An added benefit of this technique is that it automatically classifies the entire bee's path, a process that if performed manually could take an hours if not days to perform. And once the entire bee's path has been classified we can also calculate/plot how much of the time a bee spends in each cluster of behaviour. This is especially useful if we want to compare how the bee's behaviour changes as a result of different treatments:
 
 ```{r echo=FALSE}
 plot_prop_each_cluster(segment_length = 150, n_clusters = 5)
 ```
 
-Combining this information with the cluster plots above we can say things like Procaine increases the amount of time that bees hardly move around, or that Procaine reduces the amount of time spent exploring smaller regions.
+Each horizontal bar represents a different treatment, with each colour showing the percentage of the time that the bee spent within each cluster of behaviour.
+
+Combining this information with the cluster plots above we can say things like Procaine increases the amount of time that bees hardly move around (Cluster 4), or that Procaine reduces the amount of time spent exploring smaller regions (Cluster 1).
