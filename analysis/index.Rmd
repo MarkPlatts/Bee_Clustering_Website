@@ -5,11 +5,13 @@ date: 2018-03-03
 output: html_document
 ---
 
-Welcome to my research website for a project to analyse the behaviour of bees using k-means cluster analysis, a popular machine learning method.
+Welcome to our research website showcasing a collaborative machine learning project with the University of Sheffield's Department of Computer Science anaalysing the behaviour of bees using k-means cluster analysis, a popular machine learning method.
 
-The site has two main tabs, the first being "Overview" wich gives a high level explanation of the problem that this project solves and why the method is useful while second tab, "Paper" is a rough draft which we intend to  become a scientific paper. "N Clusters" gives and in depth analysis performed in Python to determine the segment length and number of clusters that obtains the maximum information from the data.
+The site has two main tabs:"Overview" which gives a high level explanation of the problem that this project solves and "Paper" which is an early draft of what is intended to become a scientific paper. 
 
-Feel free to browse as you wish and if you have any questions or want to comment on anything I'd love for you to get in touch. I especially welcome feedback and constructive criticism!
+"N Clusters" is a subsequent portion of this site whcih gives an in depth analysis performed in Python to determine the segment length and number of clusters that obtains the maximum information from the data.
+
+Feel free to browse as you wish and if you have any questions or want to comment on anything, we would love for you to get in touch. I especially welcome feedback and constructive criticism!
 
 
 
