@@ -7,4 +7,4 @@ output: html_document
 
 #Acknowledgements
 
-I want to take this opportunity to show my gratitude to Eleni Vasalaki and August Vouros of University of Sheffield, UK. Thank you Eleni for providing me with a fantastic learning opportunity and supervising my work throughout. And thank you August Vouros for his additional support through this project. It was great to work with you both.
+I want to take this opportunity to show my gratitude to Eleni Vasalaki and August Vouros of University of Sheffield, UK. Thank you, Eleni, for providing me with a fantastic learning opportunity and supervising my work throughout. And thank you, August Vouros, for your support throughout this project. It was great to work with you both.
