@@ -19,11 +19,11 @@ fig_nums <- captioner()
 
 ## Project goal
 
-The goal of this project was to extract the common behavioural patterns of bees in an experiment which shared similarities to the morris water maze experiment. Cluster analysis has previously been applied successfully to the morris water maze experiment to provide insight into how rodents behave at a fine grain resolution. The goal of this project was to investigate whether similar techniques were generalizable to different experiments and  species. In particular we wanted to analyse the behaviour of bees in an experiment adapted from the detour paradigm.
+The goal of this project was to extract the common behavioural patterns of bees in an experiment which shared similarities to the morris water maze experiment. Cluster analysis has previously been applied successfully to the morris water maze experiment to provide insight into how rodents behave at a fine grain resolution. The goal of this project was to investigate whether similar techniques were generalizable to different experiments and species. In this case we investigated the behaviour of bees in an experiment adapted from the detour paradigm, an experiment similar to the morris water maze experiment.
 
-## The adapted detour paradigm experiment 
+## The Adapted Detour paradigm experiment 
 
-In this experiment bees were placed in a circular arena in which they could only move in the x and y directions, but not vertically. Lights were then switched off and on at different positions along the edge of the arena. The bee's position was tracked for the duration of the experiment, producing a dataset of x, y coordinates at uniform time intervals. The experiments were conducted for 3 different treatment groups (1) no treatment (2) treated with saline (3) treated with saline.
+In this experiment, a bee was placed in a circular arena in which their ability to move was restricted to x and y directions only. The circular arena prevented them from moving vertically. Lights were then switched off and on at different positions along the edge of the arena. The bee's position was tracked for the duration of the experiment, producing a dataset of x, y coordinates at uniform time intervals. The experiments were conducted for 3 different treatment groups (1) bees given no treatment ('NT') (2) bees treated with saline (3) bees treated with procaine.
 
 # Methods
 
@@ -80,7 +80,7 @@ The diameter of the arena was taken to be either the distance between the max an
 ####Determining the minimum enclosing ellipse
 The minimum enclosing ellipse was computed using the Khachiyan Algorithm. Code from https://ecogenomics.github.io/GroopM/dev_docs/groopm.ellipsoid.EllipsoidTool-class.html was used with some modifications to work for 2d data.
 
-## Segmenting the bees path
+## Segmenting the bee's path
 
 A bee's path is defined as he entire path from beginning to end for a single instance of the experiment (`r fig_nums("full_path", display = "cite")`).
 ```{r, echo = F, cache=TRUE}
