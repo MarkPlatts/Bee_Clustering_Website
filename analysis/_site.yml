@@ -17,11 +17,9 @@ navbar:
     href: acknowledgements.html
   right:
   - icon: fa-github
-    href: https://github.com/jdblischak/workflowr
+    href: https://github.com/MarkPlatts/Bee_Clustering_Website
 output:
   html_document:
-    toc: yes
-    toc_float: yes
     theme: journal
     highlight: textmate
     include:
