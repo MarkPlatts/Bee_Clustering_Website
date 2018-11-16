@@ -6,6 +6,27 @@ output: html_document
 bibliography: bibliography.bibtex
 ---
 
+<!-- The file analysis/chunks.R contains chunks that define default settings
+shared across the workflowr files. -->
+```{r read-chunk, include=FALSE, cache=FALSE}
+knitr::read_chunk("chunks.R")
+```
+
+<!-- Update knitr chunk options -->
+```{r knitr-opts-chunk, include=FALSE}
+```
+
+<!-- Insert the date the file was last updated -->
+```{r last-updated, echo=FALSE, results='asis'}
+```
+
+<!-- Insert the code version (Git commit SHA1) if Git repository exists and R
+ package git2r is installed -->
+```{r code-version, echo=FALSE, results='asis'}
+```
+
+<!-- Add your analysis here -->
+
 ```{r, echo = F, message=FALSE, warning=FALSE}
 library(here)
 library(dplyr)
@@ -136,7 +157,7 @@ fig_nums("three_segments_separately", "Three segments displayed separetely.", di
 
 Since segments overlapped it was necessary to resolve the issue where overlapping segments belonged to different clusters. We used a majority voting approach similar to the one used in [@2017arXiv171107446V], but without weights since we do not know the classes. K-means cluster analysis was performed to find the natural groupings of segments according to the above extracted features. For each point a vote was taken from each segment that overlapped that position and the point assigned to the cluster with the most votes. Points where two or more cluster groups tied, were considered unidentified. 
 
-# Session information
+## Session information
 
 <!-- Insert the session information into the document -->
 ```{r session-info}

@@ -5,6 +5,27 @@ date: 2018-03-03
 output: html_document
 ---
 
+<!-- The file analysis/chunks.R contains chunks that define default settings
+shared across the workflowr files. -->
+```{r read-chunk, include=FALSE, cache=FALSE}
+knitr::read_chunk("chunks.R")
+```
+
+<!-- Update knitr chunk options -->
+```{r knitr-opts-chunk, include=FALSE}
+```
+
+<!-- Insert the date the file was last updated -->
+```{r last-updated, echo=FALSE, results='asis'}
+```
+
+<!-- Insert the code version (Git commit SHA1) if Git repository exists and R
+ package git2r is installed -->
+```{r code-version, echo=FALSE, results='asis'}
+```
+
+<!-- Add your analysis here -->
+
 Welcome to our research website showcasing a collaborative machine learning project with the University of Sheffield's Department of Computer Science anaalysing the behaviour of bees using k-means cluster analysis, a popular machine learning method.
 
 The site has two main tabs:"Overview" which gives a high level explanation of the problem that this project solves and "Paper" which is an early draft of what is intended to become a scientific paper. 
@@ -13,5 +34,8 @@ The site has two main tabs:"Overview" which gives a high level explanation of th
 
 Feel free to browse as you wish and if you have any questions or want to comment on anything, we would love for you to get in touch. I especially welcome feedback and constructive criticism!
 
+## Session information
 
-
+<!-- Insert the session information into the document -->
+```{r session-info}
+```
