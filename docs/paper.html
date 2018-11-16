@@ -27,7 +27,9 @@
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
-<link href="site_libs/font-awesome-4.5.0/css/font-awesome.min.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.0.13/css/fa-svg-with-js.css" rel="stylesheet" />
+<script src="site_libs/font-awesome-5.0.13/js/fontawesome-all.min.js"></script>
+<script src="site_libs/font-awesome-5.0.13/js/fa-v4-shims.min.js"></script>
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
@@ -95,6 +97,9 @@ img {
 }
 .tabbed-pane {
   padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
 }
 button.code-folding-btn:focus {
   outline: none;
@@ -296,7 +301,7 @@ div.tocify {
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/jdblischak/workflowr">
+  <a href="https://github.com/MarkPlatts/Bee_Clustering_Website">
     <span class="fa fa-github"></span>
      
   </a>
@@ -327,10 +332,10 @@ div.section {
 shared across the workflowr files. -->
 <!-- Update knitr chunk options -->
 <!-- Insert the date the file was last updated -->
-<p><strong>Last updated:</strong> 2018-07-25</p>
+<p><strong>Last updated:</strong> 2018-11-16</p>
 <!-- Insert the code version (Git commit SHA1) if Git repository exists and R
  package git2r is installed -->
-<p><strong>Code version:</strong> 2e33ca2</p>
+<p><strong>Code version:</strong> ca9a713</p>
 <!-- Add your analysis here -->
 <div id="introduction" class="section level1">
 <h1>Introduction</h1>
@@ -405,6 +410,7 @@ shared across the workflowr files. -->
 <p>A bee’s path is defined as he entire path from beginning to end for a single instance of the experiment (Figure 1).</p>
 <p><img src="figure/paper.Rmd/unnamed-chunk-3-1.png" width="384" style="display: block; margin: auto;" /> Figure 1: The full path of a bee in a single experiment.</p>
 <p>This was split up into segments of a uniform length where each consecutive segment overlapped the previous segment by 70% of its length. Figure 2 shows 3 overlapping segments while Figure 3 shows them separately.</p>
+<pre><code>Warning: package &#39;bindrcpp&#39; was built under R version 3.4.4</code></pre>
 <p><img src="figure/paper.Rmd/unnamed-chunk-4-1.png" width="384" style="display: block; margin: auto;" /> Figure 2: Three overlapping segments from the full bee’s path.</p>
 <p><img src="figure/paper.Rmd/unnamed-chunk-5-1.png" width="576" style="display: block; margin: auto;" /> Figure 3: Three segments displayed separetely.</p>
 </div>
@@ -423,29 +429,29 @@ Running under: Windows 7 x64 (build 7601) Service Pack 1
 Matrix products: default
 
 locale:
-[1] LC_COLLATE=English_United Kingdom.1252 
-[2] LC_CTYPE=English_United Kingdom.1252   
-[3] LC_MONETARY=English_United Kingdom.1252
-[4] LC_NUMERIC=C                           
-[5] LC_TIME=English_United Kingdom.1252    
+[1] LC_COLLATE=English_United States.1252 
+[2] LC_CTYPE=English_United States.1252   
+[3] LC_MONETARY=English_United States.1252
+[4] LC_NUMERIC=C                          
+[5] LC_TIME=English_United States.1252    
 
 attached base packages:
 [1] stats     graphics  grDevices utils     datasets  methods   base     
 
 other attached packages:
-[1] bindrcpp_0.2    captioner_2.2.3 ggplot2_2.2.1   dplyr_0.7.4    
+[1] bindrcpp_0.2.2  captioner_2.2.3 ggplot2_3.0.0   dplyr_0.7.6    
 [5] here_0.1       
 
 loaded via a namespace (and not attached):
- [1] Rcpp_0.12.13     knitr_1.17       bindr_0.1        magrittr_1.5    
- [5] munsell_0.4.3    colorspace_1.3-2 R6_2.2.2         rlang_0.2.0     
- [9] plyr_1.8.4       stringr_1.3.0    tools_3.4.3      grid_3.4.3      
-[13] gtable_0.2.0     git2r_0.21.0     htmltools_0.3.6  lazyeval_0.2.1  
-[17] yaml_2.1.16      rprojroot_1.3-2  digest_0.6.12    assertthat_0.2.0
-[21] tibble_1.4.2     reshape2_1.4.2   codetools_0.2-15 glue_1.2.0      
-[25] evaluate_0.10.1  rmarkdown_1.8    labeling_0.3     stringi_1.1.6   
-[29] compiler_3.4.3   pillar_1.1.0     scales_0.5.0     backports_1.1.1 
-[33] pkgconfig_2.0.1 </code></pre>
+ [1] Rcpp_0.12.18     knitr_1.20       bindr_0.1.1      magrittr_1.5    
+ [5] munsell_0.4.3    tidyselect_0.2.3 colorspace_1.3-2 R6_2.2.2        
+ [9] rlang_0.2.0      plyr_1.8.4       stringr_1.3.1    tools_3.4.3     
+[13] grid_3.4.3       gtable_0.2.0     withr_2.1.0      git2r_0.21.0    
+[17] htmltools_0.3.6  lazyeval_0.2.1   yaml_2.1.16      rprojroot_1.3-2 
+[21] digest_0.6.12    assertthat_0.2.0 tibble_1.4.2     reshape2_1.4.2  
+[25] purrr_0.2.4      glue_1.3.0       evaluate_0.10.1  rmarkdown_1.10  
+[29] labeling_0.3     stringi_1.1.7    compiler_3.4.3   pillar_1.1.0    
+[33] scales_0.5.0     backports_1.1.1  pkgconfig_2.0.1 </code></pre>
 </div>
 </div>
 <div id="references" class="section level1 unnumbered">

@@ -21,13 +21,12 @@
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
-<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
-<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
-<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
-<link href="site_libs/font-awesome-4.5.0/css/font-awesome.min.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.0.13/css/fa-svg-with-js.css" rel="stylesheet" />
+<script src="site_libs/font-awesome-5.0.13/js/fontawesome-all.min.js"></script>
+<script src="site_libs/font-awesome-5.0.13/js/fa-v4-shims.min.js"></script>
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css">
@@ -95,6 +94,9 @@ img {
 }
 .tabbed-pane {
   padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
 }
 button.code-folding-btn:focus {
   outline: none;
@@ -169,101 +171,6 @@ $(document).ready(function () {
 
 
 
-<script>
-$(document).ready(function ()  {
-
-    // move toc-ignore selectors from section div to header
-    $('div.section.toc-ignore')
-        .removeClass('toc-ignore')
-        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
-
-    // establish options
-    var options = {
-      selectors: "h1,h2,h3",
-      theme: "bootstrap3",
-      context: '.toc-content',
-      hashGenerator: function (text) {
-        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
-      },
-      ignoreSelector: ".toc-ignore",
-      scrollTo: 0
-    };
-    options.showAndHide = true;
-    options.smoothScroll = true;
-
-    // tocify
-    var toc = $("#TOC").tocify(options).data("toc-tocify");
-});
-</script>
-
-<style type="text/css">
-
-#TOC {
-  margin: 25px 0px 20px 0px;
-}
-@media (max-width: 768px) {
-#TOC {
-  position: relative;
-  width: 100%;
-}
-}
-
-
-.toc-content {
-  padding-left: 30px;
-  padding-right: 40px;
-}
-
-div.main-container {
-  max-width: 1200px;
-}
-
-div.tocify {
-  width: 20%;
-  max-width: 260px;
-  max-height: 85%;
-}
-
-@media (min-width: 768px) and (max-width: 991px) {
-  div.tocify {
-    width: 25%;
-  }
-}
-
-@media (max-width: 767px) {
-  div.tocify {
-    width: 100%;
-    max-width: none;
-  }
-}
-
-.tocify ul, .tocify li {
-  line-height: 20px;
-}
-
-.tocify-subheader .tocify-item {
-  font-size: 0.90em;
-  padding-left: 25px;
-  text-indent: 0;
-}
-
-.tocify .list-group-item {
-  border-radius: 0px;
-}
-
-
-</style>
-
-<!-- setup 3col/9col grid for toc_float and main content  -->
-<div class="row-fluid">
-<div class="col-xs-12 col-sm-4 col-md-3">
-<div id="TOC" class="tocify">
-</div>
-</div>
-
-<div class="toc-content col-xs-12 col-sm-8 col-md-9">
-
-
 
 
 <div class="navbar navbar-default  navbar-fixed-top" role="navigation">
@@ -296,7 +203,7 @@ div.tocify {
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/jdblischak/workflowr">
+  <a href="https://github.com/MarkPlatts/Bee_Clustering_Website">
     <span class="fa fa-github"></span>
      
   </a>
@@ -323,44 +230,10 @@ div.section {
 </div>
 
 
-<!-- The file analysis/chunks.R contains chunks that define default settings
-shared across the workflowr files. -->
-<!-- Update knitr chunk options -->
-<!-- Insert the date the file was last updated -->
-<p><strong>Last updated:</strong> 2018-07-25</p>
-<!-- Insert the code version (Git commit SHA1) if Git repository exists and R
- package git2r is installed -->
-<p><strong>Code version:</strong> 2e33ca2</p>
-<!-- Add your analysis here -->
-<div id="acknowledgements" class="section level1">
-<h1>Acknowledgements</h1>
 <p>I want to take this opportunity to show my gratitude to Eleni Vasalaki and August Vouros of University of Sheffield, UK. Thank you, Eleni, for providing me with a fantastic learning opportunity and supervising my work throughout. And thank you, August Vouros, for your support throughout this project. It was great to work with you both.</p>
 <div id="session-information" class="section level2">
 <h2>Session information</h2>
 <!-- Insert the session information into the document -->
-<pre class="r"><code>sessionInfo()</code></pre>
-<pre><code>R version 3.4.3 (2017-11-30)
-Platform: x86_64-w64-mingw32/x64 (64-bit)
-Running under: Windows 7 x64 (build 7601) Service Pack 1
-
-Matrix products: default
-
-locale:
-[1] LC_COLLATE=English_United Kingdom.1252 
-[2] LC_CTYPE=English_United Kingdom.1252   
-[3] LC_MONETARY=English_United Kingdom.1252
-[4] LC_NUMERIC=C                           
-[5] LC_TIME=English_United Kingdom.1252    
-
-attached base packages:
-[1] stats     graphics  grDevices utils     datasets  methods   base     
-
-loaded via a namespace (and not attached):
- [1] compiler_3.4.3  backports_1.1.1 magrittr_1.5    rprojroot_1.3-2
- [5] tools_3.4.3     htmltools_0.3.6 yaml_2.1.16     Rcpp_0.12.13   
- [9] stringi_1.1.6   rmarkdown_1.8   knitr_1.17      git2r_0.21.0   
-[13] stringr_1.3.0   digest_0.6.12   evaluate_0.10.1</code></pre>
-</div>
 </div>
 
 <!-- Adjust MathJax settings so that all math formulae are shown using
@@ -401,8 +274,6 @@ footer is added to webpages before the MathJax javascript. -->
 -->
 
 
-</div>
-</div>
 
 </div>
 

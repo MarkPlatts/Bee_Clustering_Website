@@ -5,29 +5,6 @@ date: 2018-07-09
 output: html_document
 ---
 
-<!-- The file analysis/chunks.R contains chunks that define default settings
-shared across the workflowr files. -->
-```{r read-chunk, include=FALSE, cache=FALSE}
-knitr::read_chunk("chunks.R")
-```
-
-<!-- Update knitr chunk options -->
-```{r knitr-opts-chunk, include=FALSE}
-```
-
-<!-- Insert the date the file was last updated -->
-```{r last-updated, echo=FALSE, results='asis'}
-```
-
-<!-- Insert the code version (Git commit SHA1) if Git repository exists and R
- package git2r is installed -->
-```{r code-version, echo=FALSE, results='asis'}
-```
-
-<!-- Add your analysis here -->
-
-#Acknowledgements
-
 I want to take this opportunity to show my gratitude to Eleni Vasalaki and August Vouros of University of Sheffield, UK. Thank you, Eleni, for providing me with a fantastic learning opportunity and supervising my work throughout. And thank you, August Vouros, for your support throughout this project. It was great to work with you both.
 
 ## Session information
